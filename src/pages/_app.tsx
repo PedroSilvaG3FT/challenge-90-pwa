@@ -1,6 +1,7 @@
-import React from "react";
-import Head from "next/head";
-import { AppProps } from "next/app";
+import React from 'react'
+import Head from 'next/head'
+import { AppProps } from 'next/app'
+import Layout from '@/components/ui/layout'
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
     return (
@@ -11,9 +12,12 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
                     content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=5"
                 />
             </Head>
-            <Component {...pageProps} />
-        </>
-    );
-};
 
-export default MyApp;
+            <Layout>
+                <Component {...pageProps} />
+            </Layout>
+        </>
+    )
+}
+
+export default MyApp
