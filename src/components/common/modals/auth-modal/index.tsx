@@ -1,8 +1,11 @@
 import React from 'react'
 import * as yup from 'yup'
+import { useForm } from 'react-hook-form'
 import Logo from '@/assets/images/logo.png'
 import AppModal from '@/components/common/app-modal'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { AuthService } from '@/services/auth.service'
+import { authActions } from '@/store/reducers/auth.reducer'
 import { AppModalInterface } from '@/interfaces/modal.interface'
 import {
     Body,
@@ -15,7 +18,6 @@ import {
     Span,
     Button
 } from './styles'
-import { useForm } from 'react-hook-form'
 
 interface AuthModalProps extends AppModalInterface {
     isOpen: boolean
@@ -28,6 +30,7 @@ interface LoginFormInterface {
 
 const AuthModal: React.FC<AuthModalProps> = props => {
     const { isOpen, onBackdropClick, onClose } = props
+    const authService = new AuthService()
 
     const authForm = yup.object().shape({
         email: yup.string().email('Email inválido').required('Insira um email'),
@@ -40,8 +43,14 @@ const AuthModal: React.FC<AuthModalProps> = props => {
         formState: { errors }
     } = useForm<LoginFormInterface>({ resolver: yupResolver(authForm) })
 
-    const handleSubmitForm = (data: LoginFormInterface) => {
-        console.log('DATA :', data)
+    const handleSubmitForm = async (loginForm: LoginFormInterface) => {
+        try {
+            const { data } = await authService.login(loginForm)
+            authActions.setUser(data.user)
+            authActions.setToken(data.token)
+        } catch (error) {
+            console.error(error)
+        }
     }
 
     return (
