@@ -19,6 +19,10 @@ export default createGlobalStyle`
     scroll-behavior: smooth;
   }
 
+  button {
+    ${tw`border-0`}
+  }
+
   #__next {
       height: 100vh;
   }
