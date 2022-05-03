@@ -18,9 +18,10 @@ import {
     Span,
     Button
 } from './styles'
+import { UserService } from '@/services/user.service'
 
 interface AuthModalProps extends AppModalInterface {
-    isOpen: boolean
+    onLogin: () => void
 }
 
 interface LoginFormInterface {
@@ -29,8 +30,9 @@ interface LoginFormInterface {
 }
 
 const AuthModal: React.FC<AuthModalProps> = props => {
-    const { isOpen, onBackdropClick, onClose } = props
+    const { isOpen, onBackdropClick, onClose, onLogin } = props
     const authService = new AuthService()
+    const userService = new UserService()
 
     const authForm = yup.object().shape({
         email: yup.string().email('Email inválido').required('Insira um email'),
@@ -46,8 +48,12 @@ const AuthModal: React.FC<AuthModalProps> = props => {
     const handleSubmitForm = async (loginForm: LoginFormInterface) => {
         try {
             const { data } = await authService.login(loginForm)
-            authActions.setUser(data.user)
+            const { data: user } = await userService.getById(data.user.id)
+
+            authActions.setUser(user)
             authActions.setToken(data.token)
+
+            onLogin()
         } catch (error) {
             console.error(error)
         }
@@ -76,7 +82,7 @@ const AuthModal: React.FC<AuthModalProps> = props => {
 
                     <FormGroup>
                         <Label>Senha</Label>
-                        <Input {...register('password')} />
+                        <Input {...register('password')} type="password" />
                         <Span>{errors.password?.message}</Span>
                     </FormGroup>
 
