@@ -1,10 +1,10 @@
 {
     "description": "Vamos ao desafio",
-    "background_color": "#121214",
-    "theme_color": "#C200FB",
+    "background_color": "#1A1A2E",
+    "short_name": "Desafio 90",
+    "theme_color": "#1A1A2E",
     "display": "standalone",
     "name": "Desafio 90",
-    "short_name": "D90",
     "start_url": "/",
     "scope": "/",
     "icons": [
@@ -21,11 +21,6 @@
         {
             "src": "/icon-512x512.png",
             "sizes": "512x512",
-            "type": "image/png"
-        },
-        {
-            "src": "/icon-1024x1024.png",
-            "sizes": "1024x1024",
             "type": "image/png"
         }
     ]

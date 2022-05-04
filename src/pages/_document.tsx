@@ -4,42 +4,42 @@ import Document, {
     Main,
     NextScript,
     DocumentContext,
-    DocumentInitialProps,
-} from "next/document";
-import React, { ReactElement } from "react";
-import { ServerStyleSheet } from "styled-components";
-import { ComponentsEnhancer } from "next/dist/shared/lib/utils";
+    DocumentInitialProps
+} from 'next/document'
+import React, { ReactElement } from 'react'
+import { ServerStyleSheet } from 'styled-components'
+import { ComponentsEnhancer } from 'next/dist/shared/lib/utils'
 
-type ContextType = DocumentContext;
-type InitalPropsType = DocumentInitialProps;
+type ContextType = DocumentContext
+type InitalPropsType = DocumentInitialProps
 
 export default class MyDocument extends Document {
     static async getInitialProps(ctx: ContextType): Promise<InitalPropsType> {
-        const sheet = new ServerStyleSheet();
-        const originalRenderPage = ctx.renderPage;
+        const sheet = new ServerStyleSheet()
+        const originalRenderPage = ctx.renderPage
 
         try {
             ctx.renderPage = () => {
                 const config: ComponentsEnhancer = {
-                    enhanceApp: (App) => (props) =>
-                        sheet.collectStyles(<App {...props} />),
-                };
+                    enhanceApp: App => props =>
+                        sheet.collectStyles(<App {...props} />)
+                }
 
-                return originalRenderPage(config);
-            };
+                return originalRenderPage(config)
+            }
 
-            const initialProps = await Document.getInitialProps(ctx);
+            const initialProps = await Document.getInitialProps(ctx)
 
             const styles = (
                 <>
                     {initialProps.styles}
                     {sheet.getStyleElement()}
                 </>
-            ) as ReactElement | any;
+            ) as ReactElement | any
 
-            return { ...initialProps, styles };
+            return { ...initialProps, styles }
         } finally {
-            sheet.seal();
+            sheet.seal()
         }
     }
 
@@ -47,17 +47,17 @@ export default class MyDocument extends Document {
         return (
             <Html lang="pt">
                 <Head>
-                    <link rel="icon" href="/favicon.ico" />
+                    <link rel="icon" href="/icon-128x128.png" />
                     <link rel="manifest" href="/manifest.json" />
                     <link rel="apple-touch-icon" href="/apple-icon.png" />
 
-                    <meta name="theme-color" content="#fff" />
+                    <meta name="theme-color" content="#1A1A2E" />
                 </Head>
                 <body>
                     <Main />
                     <NextScript />
                 </body>
             </Html>
-        );
+        )
     }
 }

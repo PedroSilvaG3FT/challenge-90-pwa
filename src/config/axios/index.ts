@@ -1,8 +1,9 @@
 import axios, { AxiosRequestConfig } from 'axios'
+import enviroments from '@/config/env/enviroments'
 
+console.log('ENV :', enviroments.API_URL)
 const axiosClient = axios.create({
-    // baseURL: enviroments.API_URL,
-    baseURL: 'http://challenge90-api.herokuapp.com',
+    baseURL: enviroments.API_URL,
     headers: {
         Accept: 'application/json',
         'content-type': 'application/json'
