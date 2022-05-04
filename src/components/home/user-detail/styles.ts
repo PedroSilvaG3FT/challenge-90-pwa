@@ -1,11 +1,15 @@
-import { AppButton } from '@/styles/css/ts/components'
+import { AppButton, AppContainer } from '@/styles/css/ts/components'
 import styled from 'styled-components'
 import tw from 'twin.macro'
 
-export const Container = styled.section`
-    ${tw`px-4 pb-6 pt-14 rounded-b-[2rem] flex flex-col items-center`}
+export const Container = styled(AppContainer)`
+    ${tw`pb-6 pt-14 rounded-b-[2rem]`}
     background: ${props => props.theme.colors.bgSecondary};
     box-shadow: ${props => `0px 4px 16px ${props.theme.colors.bgSecondary}`};
+`
+
+export const Content = styled.section`
+    ${tw`flex flex-col items-center`}
 `
 
 export const Article = styled.article`

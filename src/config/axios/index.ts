@@ -1,7 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios'
 import enviroments from '@/config/env/enviroments'
 
-console.log('ENV :', enviroments.API_URL)
 const axiosClient = axios.create({
     baseURL: enviroments.API_URL,
     headers: {

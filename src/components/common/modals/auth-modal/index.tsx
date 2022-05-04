@@ -5,20 +5,22 @@ import Logo from '@/assets/images/logo.png'
 import AppModal from '@/components/common/app-modal'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { AuthService } from '@/services/auth.service'
+import { UserService } from '@/services/user.service'
+import { AlertService } from '@/services/_alert.service'
 import { authActions } from '@/store/reducers/auth.reducer'
 import { AppModalInterface } from '@/interfaces/modal.interface'
+import { ResponseErrorInterface } from '@/interfaces/_response-error.interface'
 import {
     Body,
-    ImageLogo,
-    Header,
+    Span,
     Form,
-    FormGroup,
     Input,
     Label,
-    Span,
-    Button
+    Header,
+    Button,
+    ImageLogo,
+    FormGroup
 } from './styles'
-import { UserService } from '@/services/user.service'
 
 interface AuthModalProps extends AppModalInterface {
     onLogin: () => void
@@ -33,6 +35,7 @@ const AuthModal: React.FC<AuthModalProps> = props => {
     const { isOpen, onBackdropClick, onClose, onLogin } = props
     const authService = new AuthService()
     const userService = new UserService()
+    const alertService = new AlertService()
 
     const authForm = yup.object().shape({
         email: yup.string().email('Email inválido').required('Insira um email'),
@@ -54,8 +57,8 @@ const AuthModal: React.FC<AuthModalProps> = props => {
             authActions.setToken(data.token)
 
             onLogin()
-        } catch (error) {
-            console.error(error)
+        } catch (error: ResponseErrorInterface) {
+            alertService.error(error.response.data.message)
         }
     }
 

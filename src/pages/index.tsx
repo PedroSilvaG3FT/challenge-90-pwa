@@ -14,6 +14,8 @@ const Wellcome: React.FC = () => {
         router.push('/home')
     }
 
+    const goToRegister = () => router.push('/register')
+
     return (
         <>
             <AppHead title="Bem vindo" />
@@ -23,7 +25,7 @@ const Wellcome: React.FC = () => {
                     <Image src={Logo} alt="Desafio 90" />
 
                     <Button onClick={() => setIsModalOpen(true)}>Entrar</Button>
-                    <Button>Cadastre-se</Button>
+                    <Button onClick={() => goToRegister()}>Cadastre-se</Button>
                 </Content>
             </Container>
 
@@ -31,7 +33,6 @@ const Wellcome: React.FC = () => {
                 onLogin={onLogin}
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
-                onBackdropClick={() => setIsModalOpen(false)}
             />
         </>
     )

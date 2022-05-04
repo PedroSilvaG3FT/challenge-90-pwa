@@ -1,8 +1,9 @@
+import { AppContainer } from '@/styles/css/ts/components'
 import styled from 'styled-components'
 import tw from 'twin.macro'
 
-export const Container = styled.section`
-    ${tw`pb-8 pt-14 px-4`}
+export const Container = styled(AppContainer)`
+    ${tw`pb-8 pt-14`}
 `
 
 export const Grid = styled.div`
