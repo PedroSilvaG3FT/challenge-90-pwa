@@ -5,7 +5,6 @@ import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 import AppHead from '@/components/common/app-head'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { UserService } from '@/services/user.service'
 import { AlertService } from '@/services/_alert.service'
 import { registerActions } from '@/store/reducers/register.reducer'
 import { RegisterFormInterface } from '@/interfaces/user-register.interface'
@@ -20,18 +19,18 @@ import {
     Span
 } from '@/styles/pages/register'
 
-const Register: React.FC = () => {
+const PersonalData: React.FC = () => {
     const router = useRouter()
-    const userService = new UserService()
     const alertService = new AlertService()
     const { model } = useMapState('register') as RegisterStateInterface
 
-    const error = () => alertService.error('Wow so easy!')
+    const success = () => alertService.success('Wow so easy!')
 
     const registerForm = yup.object().shape({
-        email: yup.string().email('Email inválido').required('Insira um email'),
-        password: yup.string().required('Insira a senha'),
-        confirmPassword: yup.string().required('Confirme a senha')
+        name: yup.string().required('Insira o seu nome'),
+        cpf: yup.string().required('Insira o seu CPF'),
+        age: yup.string().required('Insira a sua idade'),
+        phoneNumber: yup.number().required('Insira o número de telefone')
     })
 
     const {
@@ -40,25 +39,11 @@ const Register: React.FC = () => {
         formState: { errors }
     } = useForm<RegisterFormInterface>({ resolver: yupResolver(registerForm) })
 
-    const hasUserEmail = async (email: string) => {
-        try {
-            const { data } = await userService.getByEmail(email)
-            return !!data
-        } catch (error) {
-            console.error(error)
-        }
-    }
-
     const handleSubmitForm = async (registerForm: RegisterFormInterface) => {
-        const hasUser = await hasUserEmail(registerForm.email as string)
-
-        if (hasUser) {
-            alertService.error('Esse email já está em uso ')
-            return
-        }
-
+        console.log('Personal Data', registerForm)
         registerActions.setRegisterModel({ ...model, ...registerForm })
-        router.push('/register/personal-data')
+
+        router.push('/register/measurements')
     }
 
     return (
@@ -68,24 +53,27 @@ const Register: React.FC = () => {
             <Container>
                 <Form onSubmit={handleSubmit(handleSubmitForm)}>
                     <FormGroup>
-                        <Label>Email</Label>
-                        <Input {...register('email')} />
-                        <Span>{errors.email?.message}</Span>
+                        <Label>Nome</Label>
+                        <Input {...register('name')} type="text" />
+                        <Span>{errors.name?.message}</Span>
                     </FormGroup>
 
                     <FormGroup>
-                        <Label>Senha</Label>
-                        <Input {...register('password')} type="password" />
-                        <Span>{errors.password?.message}</Span>
+                        <Label>CPF</Label>
+                        <Input {...register('cpf')} type="text" />
+                        <Span>{errors.cpf?.message}</Span>
                     </FormGroup>
 
                     <FormGroup>
-                        <Label>Confirmar Senha</Label>
-                        <Input
-                            {...register('confirmPassword')}
-                            type="password"
-                        />
-                        <Span>{errors.confirmPassword?.message}</Span>
+                        <Label>Idade</Label>
+                        <Input {...register('age')} type="number" />
+                        <Span>{errors.age?.message}</Span>
+                    </FormGroup>
+
+                    <FormGroup>
+                        <Label>Celular</Label>
+                        <Input {...register('phoneNumber')} type="number" />
+                        <Span>{errors.phoneNumber?.message}</Span>
                     </FormGroup>
 
                     <Button type="submit">Avançar</Button>
@@ -95,4 +83,4 @@ const Register: React.FC = () => {
     )
 }
 
-export default Register
+export default PersonalData
