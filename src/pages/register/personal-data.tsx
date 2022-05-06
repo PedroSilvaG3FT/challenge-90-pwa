@@ -4,8 +4,9 @@ import { useMapState } from '@/hooks'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 import AppHead from '@/components/common/app-head'
+import ResumeIcon from '@/assets/icons/resume.png'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { AlertService } from '@/services/_alert.service'
+import TitleContainer from '@/components/register/title-container'
 import { registerActions } from '@/store/reducers/register.reducer'
 import { RegisterFormInterface } from '@/interfaces/user-register.interface'
 import { RegisterStateInterface } from '@/store/@interfaces/registerState.interface'
@@ -16,21 +17,22 @@ import {
     Button,
     Input,
     Label,
-    Span
+    Span,
+    Separator
 } from '@/styles/pages/register'
+import { useMask } from '@/hooks/mask.hook'
 
 const PersonalData: React.FC = () => {
     const router = useRouter()
-    const alertService = new AlertService()
+    const cpfMask = useMask('cpf')
+    const phoneNumberMask = useMask('phoneNumber')
     const { model } = useMapState('register') as RegisterStateInterface
-
-    const success = () => alertService.success('Wow so easy!')
 
     const registerForm = yup.object().shape({
         name: yup.string().required('Insira o seu nome'),
         cpf: yup.string().required('Insira o seu CPF'),
         age: yup.string().required('Insira a sua idade'),
-        phoneNumber: yup.number().required('Insira o número de telefone')
+        phoneNumber: yup.string().required('Insira o número de telefone')
     })
 
     const {
@@ -40,9 +42,16 @@ const PersonalData: React.FC = () => {
     } = useForm<RegisterFormInterface>({ resolver: yupResolver(registerForm) })
 
     const handleSubmitForm = async (registerForm: RegisterFormInterface) => {
-        console.log('Personal Data', registerForm)
-        registerActions.setRegisterModel({ ...model, ...registerForm })
+        const formDTO = {
+            ...model,
+            ...registerForm,
+            cpf: cpfMask.getRawValue(registerForm.cpf as string),
+            phoneNumber: phoneNumberMask.getRawValue(
+                registerForm.phoneNumber as string
+            )
+        } as RegisterFormInterface
 
+        registerActions.setRegisterModel(formDTO)
         router.push('/register/measurements')
     }
 
@@ -51,6 +60,13 @@ const PersonalData: React.FC = () => {
             <AppHead title="Cadastre - se" />
 
             <Container>
+                <TitleContainer
+                    image={ResumeIcon}
+                    title="Insira os seus dados de acesso"
+                />
+
+                <Separator />
+
                 <Form onSubmit={handleSubmit(handleSubmitForm)}>
                     <FormGroup>
                         <Label>Nome</Label>
@@ -60,19 +76,31 @@ const PersonalData: React.FC = () => {
 
                     <FormGroup>
                         <Label>CPF</Label>
-                        <Input {...register('cpf')} type="text" />
+                        <Input
+                            {...cpfMask.directive}
+                            {...register('cpf')}
+                            type="text"
+                        />
                         <Span>{errors.cpf?.message}</Span>
                     </FormGroup>
 
                     <FormGroup>
                         <Label>Idade</Label>
-                        <Input {...register('age')} type="number" />
+                        <Input
+                            {...register('age')}
+                            maxLength={3}
+                            type="number"
+                        />
                         <Span>{errors.age?.message}</Span>
                     </FormGroup>
 
                     <FormGroup>
                         <Label>Celular</Label>
-                        <Input {...register('phoneNumber')} type="number" />
+                        <Input
+                            {...phoneNumberMask.directive}
+                            {...register('phoneNumber')}
+                            type="text"
+                        />
                         <Span>{errors.phoneNumber?.message}</Span>
                     </FormGroup>
 

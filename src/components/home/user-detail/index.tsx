@@ -1,5 +1,6 @@
 import React from 'react'
 import { useMapState } from '@/hooks'
+import Avatar from '@/assets/icons/avatar.png'
 import Summary from '@/components/home/user-detail/summary'
 import UserGoals from '@/components/home/user-detail/user-goals'
 import { Container, Content, Article, Image, Separator, Button } from './styles'
@@ -12,7 +13,7 @@ const UserDetail: React.FC = () => {
         <Container>
             <Content>
                 <Article>
-                    <Image src={user.image} />
+                    <Image src={user.image || Avatar} />
                     <UserGoals />
                 </Article>
 

@@ -33,8 +33,7 @@ const Summary: React.FC = () => {
         const maxDay = 90
         const currentDay = new Date()
         const initalDay = new Date(user.dateApproval as Date)
-        const countDay = differenceInDays(currentDay, initalDay)
-
+        const countDay = differenceInDays(initalDay, currentDay)
         const days = countDay > maxDay ? maxDay : countDay
 
         return {
@@ -51,8 +50,8 @@ const Summary: React.FC = () => {
         return {
             title: 'Meta da semana',
             color: Theme.colors.yellow,
-            label: `${currentWeight}/${goalWeek} kg`,
-            percent: getPercent(Number(goalWeek), Number(currentWeight))
+            label: `${currentWeight}/${goalWeek || 0} kg`,
+            percent: getPercent(Number(goalWeek || 0), Number(currentWeight))
         }
     }
 
@@ -61,8 +60,8 @@ const Summary: React.FC = () => {
         return {
             title: 'Meta Final',
             color: Theme.colors.primary,
-            label: `${currentWeight}/${goalWeight} kg`,
-            percent: getPercent(Number(goalWeight), Number(currentWeight))
+            label: `${currentWeight}/${goalWeight || 0} kg`,
+            percent: getPercent(Number(goalWeight || 0), Number(currentWeight))
         }
     }
 

@@ -21,7 +21,7 @@ const UserGoals: React.FC = () => {
                 {items.map((item, index) => (
                     <Article key={index}>
                         <Title>{item.label}</Title>
-                        <Text>{item.value} kg</Text>
+                        <Text>{item.value || 0} kg</Text>
                     </Article>
                 ))}
             </Content>

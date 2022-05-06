@@ -7,11 +7,18 @@ import {
 } from '@/styles/css/ts/components'
 
 export const Container = styled(AppContainer)`
-    ${tw`py-16 h-full flex justify-center items-center`}
+    ${tw`py-16 h-full flex flex-col items-center`}
+`
+
+export const Separator = styled.hr`
+    ${tw`w-full my-10 rounded`}
+    border-width: 1px;
+    border-style: solid;
+    border-color: ${props => props.theme.colors.bgSecondary};
 `
 
 export const Form = styled.form`
-    ${tw`w-full`}
+    ${tw`w-full `}
 `
 
 export const FormGroup = styled(AppFormGroup)`

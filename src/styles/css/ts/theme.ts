@@ -11,7 +11,12 @@ const background = {
     bgSecondary: '#16213E'
 }
 
+const spacing = {
+    headerHeight: '5rem'
+}
+
 export default {
+    spacing,
     colors: {
         text: '#FFF',
         ...colors,

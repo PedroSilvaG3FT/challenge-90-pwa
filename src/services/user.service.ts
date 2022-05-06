@@ -1,22 +1,24 @@
 import { httpClient } from '@/config/axios'
+import { RegisterFormInterface } from '@/interfaces/user-register.interface'
+import UserInterface from '@/interfaces/user.interface'
 
 export class UserService {
     getAll() {
-        return httpClient.get<any>(`user?userType=2`)
+        return httpClient.get<UserInterface[]>(`user?userType=2`)
     }
     getById(id: number) {
-        return httpClient.get<any>(`user/${id}`)
+        return httpClient.get<UserInterface>(`user/${id}`)
     }
     getByEmail(email: string) {
-        return httpClient.get<any>(`user/email/${email}`)
+        return httpClient.get<UserInterface>(`user/email/${email}`)
     }
-    create(data: object) {
-        return httpClient.post('user', data)
+    create(payload: RegisterFormInterface) {
+        return httpClient.post('user', payload)
     }
-    update(data: object) {
-        return httpClient.put('user', data)
+    update(payload: object) {
+        return httpClient.put('user', payload)
     }
-    updatePassword(data: { password: string; userId: number }) {
-        return httpClient.put('user/change-password', data)
+    updatePassword(payload: { password: string; userId: number }) {
+        return httpClient.put('user/change-password', payload)
     }
 }

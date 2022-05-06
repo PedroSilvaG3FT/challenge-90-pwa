@@ -12,9 +12,7 @@ export const ModalContainer = styled(motion.article)`
     ${tw`p-6 pb-10 flex flex-col z-50 rounded-lg mx-14`}
     height: 40vh;
     background: ${props => props.theme.colors.bgPrimary};
-    box-shadow: ${props => {
-        return `0px 4px 16px ${props.theme.colors.bgPrimary}`
-    }};
+    box-shadow: ${props => `0px 4px 16px ${props.theme.colors.bgPrimary}`};
 `
 
 export const ModalHeader = styled.div`

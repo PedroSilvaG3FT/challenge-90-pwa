@@ -17,12 +17,17 @@ const { actions: mutations, reducer } = createSlice({
         },
         setUser(state, { payload }) {
             state.user = payload
+        },
+        logout(state) {
+            state.token = ''
+            state.user = {} as UserInterface
         }
     }
 })
 
 export const authActions = {
     setToken: (payload: string) => store.dispatch(mutations.setToken(payload)),
+    logout: () => store.dispatch(mutations.logout()),
     setUser: (payload: UserInterface) =>
         store.dispatch(mutations.setUser(payload))
 }

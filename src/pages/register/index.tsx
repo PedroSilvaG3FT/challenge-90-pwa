@@ -6,9 +6,12 @@ import { useForm } from 'react-hook-form'
 import AppHead from '@/components/common/app-head'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { UserService } from '@/services/user.service'
+import SecurityIcon from '@/assets/icons/security.png'
 import { AlertService } from '@/services/_alert.service'
+import TitleContainer from '@/components/register/title-container'
 import { registerActions } from '@/store/reducers/register.reducer'
 import { RegisterFormInterface } from '@/interfaces/user-register.interface'
+import { ResponseErrorInterface } from '@/interfaces/_response-error.interface'
 import { RegisterStateInterface } from '@/store/@interfaces/registerState.interface'
 import {
     Container,
@@ -17,7 +20,8 @@ import {
     Button,
     Input,
     Label,
-    Span
+    Span,
+    Separator
 } from '@/styles/pages/register'
 
 const Register: React.FC = () => {
@@ -25,8 +29,6 @@ const Register: React.FC = () => {
     const userService = new UserService()
     const alertService = new AlertService()
     const { model } = useMapState('register') as RegisterStateInterface
-
-    const error = () => alertService.error('Wow so easy!')
 
     const registerForm = yup.object().shape({
         email: yup.string().email('Email inválido').required('Insira um email'),
@@ -44,8 +46,8 @@ const Register: React.FC = () => {
         try {
             const { data } = await userService.getByEmail(email)
             return !!data
-        } catch (error) {
-            console.error(error)
+        } catch (error: ResponseErrorInterface) {
+            alertService.error(error.response.data.message)
         }
     }
 
@@ -53,7 +55,12 @@ const Register: React.FC = () => {
         const hasUser = await hasUserEmail(registerForm.email as string)
 
         if (hasUser) {
-            alertService.error('Esse email já está em uso ')
+            alertService.error('Esse email já está em uso')
+            return
+        }
+
+        if (registerForm.password != registerForm.confirmPassword) {
+            alertService.error('As senhas não coincidem')
             return
         }
 
@@ -66,6 +73,13 @@ const Register: React.FC = () => {
             <AppHead title="Cadastre - se" />
 
             <Container>
+                <TitleContainer
+                    image={SecurityIcon}
+                    title="Insira os seus dados de acesso"
+                />
+
+                <Separator />
+
                 <Form onSubmit={handleSubmit(handleSubmitForm)}>
                     <FormGroup>
                         <Label>Email</Label>
