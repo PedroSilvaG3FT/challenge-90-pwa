@@ -4,10 +4,13 @@ import Logo from '@/assets/images/logo.png'
 import AppHead from '@/components/common/app-head'
 import AuthModal from '@/components/common/modals/auth-modal'
 import { Container, Content, Image, Button } from '@/styles/pages/home'
+import { useMapState } from '@/hooks'
+import { AuthStateInterface } from '@/store/@interfaces/authState.interface'
 
 const Wellcome: React.FC = () => {
     const router = useRouter()
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const { token } = useMapState('auth') as AuthStateInterface
 
     const onLogin = async () => {
         setIsModalOpen(false)
@@ -15,6 +18,11 @@ const Wellcome: React.FC = () => {
     }
 
     const goToRegister = () => router.push('/register')
+
+    const handleEnter = () => {
+        if (token) router.push('/home')
+        else setIsModalOpen(true)
+    }
 
     return (
         <>
@@ -24,7 +32,7 @@ const Wellcome: React.FC = () => {
                 <Content>
                     <Image src={Logo} alt="Desafio 90" />
 
-                    <Button onClick={() => setIsModalOpen(true)}>Entrar</Button>
+                    <Button onClick={() => handleEnter()}>Entrar</Button>
                     <Button onClick={() => goToRegister()}>Cadastre-se</Button>
                 </Content>
             </Container>

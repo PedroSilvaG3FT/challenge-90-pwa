@@ -5,7 +5,8 @@ export const Container = styled.article`
     ${tw`px-6 py-3 flex items-center justify-center rounded`}
 
     background: ${props => props.theme.colors.bgSecondary};
-    box-shadow: ${props => `0px 4px 16px ${props.theme.colors.bgSecondary}`};
+    box-shadow: ${({ theme }) =>
+        theme.boxShadow.bottom(theme.colors.bgSecondary)};
 `
 
 export const Image = styled.img`

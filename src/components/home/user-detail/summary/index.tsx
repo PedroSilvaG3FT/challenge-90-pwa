@@ -33,7 +33,7 @@ const Summary: React.FC = () => {
         const maxDay = 90
         const currentDay = new Date()
         const initalDay = new Date(user.dateApproval as Date)
-        const countDay = differenceInDays(initalDay, currentDay)
+        const countDay = differenceInDays(currentDay, initalDay)
         const days = countDay > maxDay ? maxDay : countDay
 
         return {

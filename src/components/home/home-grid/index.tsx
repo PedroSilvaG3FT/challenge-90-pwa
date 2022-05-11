@@ -10,8 +10,8 @@ const HomeGrid: React.FC = () => {
     const router = useRouter()
 
     const items = [
-        { title: 'Cárdapio', icon: <MdRestaurantMenu />, route: '/group' },
-        { title: 'Exercícios', icon: <CgGym />, route: '/group' },
+        { title: 'Cárdapio', icon: <MdRestaurantMenu />, route: '/menu' },
+        { title: 'Exercícios', icon: <CgGym />, route: '/exercise' },
         { title: 'Grupo', icon: <HiUserGroup />, route: '/group' },
         { title: 'Calcular IMC', icon: <FaBalanceScale />, route: '/group' }
     ]

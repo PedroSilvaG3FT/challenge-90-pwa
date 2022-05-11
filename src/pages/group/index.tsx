@@ -1,10 +1,11 @@
+import { useMapState } from '@/hooks'
 import { BsWhatsapp } from 'react-icons/bs'
 import Avatar from '@/assets/icons/avatar.png'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import AppHead from '@/components/common/app-head'
 import { UserService } from '@/services/user.service'
-import UserInterface from '@/interfaces/user.interface'
 import { AlertService } from '@/services/_alert.service'
+import { GroupStateInterface } from '@/store/@interfaces/groupState.interface'
 import { ResponseErrorInterface } from '@/interfaces/_response-error.interface'
 import {
     Grid,
@@ -18,11 +19,12 @@ import {
     Container,
     Separator
 } from '@/styles/pages/group'
+import { groupActions } from '@/store/reducers/group.reducer'
 
 const Group: React.FC = () => {
     const userService = new UserService()
     const alertService = new AlertService()
-    const [userList, setUserList] = useState<UserInterface[]>([])
+    const { group } = useMapState('group') as GroupStateInterface
 
     useEffect(() => {
         getUserList()
@@ -31,7 +33,7 @@ const Group: React.FC = () => {
     const getUserList = async () => {
         try {
             const { data } = await userService.getAll()
-            setUserList(data)
+            groupActions.setGroup(data)
         } catch (error: ResponseErrorInterface) {
             alertService.error(error.response.data.message)
         }
@@ -43,7 +45,7 @@ const Group: React.FC = () => {
 
             <Container showHeader>
                 <Grid>
-                    {userList.map((item, index) => (
+                    {group.map((item, index) => (
                         <Card key={index}>
                             <Image src={item.image || Avatar} />
 

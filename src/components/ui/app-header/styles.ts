@@ -3,10 +3,15 @@ import styled from 'styled-components'
 import { AppButton, AppContainer } from '@/styles/css/ts/components'
 
 export const Container = styled(AppContainer)`
-    ${tw`rounded-b-[1.2rem] flex justify-center fixed`}
+    ${tw`p-0 fixed w-full max-w-full`}
+`
+
+export const Content = styled(AppContainer)`
+    ${tw`rounded-b-[1.2rem] flex justify-center `}
     height: ${props => props.theme.spacing.headerHeight};
     background: ${props => props.theme.colors.bgSecondary};
-    box-shadow: ${props => `0px 4px 18px ${props.theme.colors.bgPrimary}`};
+    box-shadow: ${({ theme }) =>
+        theme.boxShadow.bottom(theme.colors.bgPrimary)};
 `
 
 export const Nav = styled.nav`

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { Container, Nav, Button, Title, Slot } from './styles'
+import { Container, Content, Nav, Button, Title, Slot } from './styles'
 import { AppHeaderInterface } from '@/interfaces/_appHeader.interface'
 
 const AppHeader: React.FC<AppHeaderInterface> = props => {
@@ -9,19 +9,21 @@ const AppHeader: React.FC<AppHeaderInterface> = props => {
 
     return (
         <Container>
-            <Nav>
-                <Slot>
-                    {backTo && (
-                        <Button onClick={() => router.push(backTo)}>
-                            {backToText || 'Voltar'}
-                        </Button>
-                    )}
-                </Slot>
+            <Content>
+                <Nav>
+                    <Slot>
+                        {backTo && (
+                            <Button onClick={() => router.push(backTo)}>
+                                {backToText || 'Voltar'}
+                            </Button>
+                        )}
+                    </Slot>
 
-                <Title>{title}</Title>
+                    <Title>{title}</Title>
 
-                <Slot>{rightSlot}</Slot>
-            </Nav>
+                    <Slot>{rightSlot}</Slot>
+                </Nav>
+            </Content>
         </Container>
     )
 }
