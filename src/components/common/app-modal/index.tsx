@@ -23,7 +23,8 @@ const AppModal: React.FC<AppModalInterface> = props => {
         children,
         maxHeight,
         onClickClose,
-        onBackdropClick
+        onBackdropClick,
+        containerStyle
     } = props
 
     useEffect(() => {
@@ -51,6 +52,7 @@ const AppModal: React.FC<AppModalInterface> = props => {
                         style={{
                             maxWidth,
                             maxHeight,
+                            ...containerStyle,
                             width: width || 490,
                             height: height || 'fit-content'
                         }}

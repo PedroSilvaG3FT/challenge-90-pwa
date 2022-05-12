@@ -25,22 +25,24 @@ const Menu: React.FC = () => {
         {} as MenuDayInterface
     )
     useEffect(() => {
-        initCurrentDay()
         getMenuUser()
     }, [])
 
     const getMenuUser = async () => {
         try {
             const { data } = await menuService.getById(Number(user.id))
+
             menuActions.setMenu(data)
+            initCurrentDay()
         } catch (error: ResponseErrorInterface) {
             alertService.error(error.response.data.message)
         }
     }
 
     const initCurrentDay = () => {
+        if (!menu.days) return
         const current = new Date().getDay() + 1
-
+        console.log('|||||||||||', menu)
         const [first] = menu.days.filter(
             ({ numberDay }) => numberDay === current
         )

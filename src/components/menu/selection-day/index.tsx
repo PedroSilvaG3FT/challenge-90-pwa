@@ -21,15 +21,16 @@ const SelectionDay: React.FC<SelectionDayInterface> = props => {
     return (
         <Container>
             <Content>
-                {days.map((item, index) => (
-                    <Article
-                        key={index}
-                        onClick={() => onSelect(item)}
-                        className={getClassName(item.dayId)}
-                    >
-                        <Text>{item.dayName}</Text>
-                    </Article>
-                ))}
+                {days &&
+                    days.map((item, index) => (
+                        <Article
+                            key={index}
+                            onClick={() => onSelect(item)}
+                            className={getClassName(item.dayId)}
+                        >
+                            <Text>{item.dayName}</Text>
+                        </Article>
+                    ))}
             </Content>
         </Container>
     )

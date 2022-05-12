@@ -12,4 +12,5 @@ export interface AppModalInterface {
     onBackdropClick?: Function
     onClose?: Function
     children?: ReactNode
+    containerStyle?: any
 }
