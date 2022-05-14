@@ -13,11 +13,15 @@ const { actions: mutations, reducer } = createSlice({
     reducers: {
         setMenu(state, { payload }) {
             state.menu = payload
+        },
+        clearState(state) {
+            state.menu = {} as MenuInterface
         }
     }
 })
 
 export const menuActions = {
+    clearState: () => store.dispatch(mutations.clearState()),
     setMenu: (payload: MenuInterface) =>
         store.dispatch(mutations.setMenu(payload))
 }

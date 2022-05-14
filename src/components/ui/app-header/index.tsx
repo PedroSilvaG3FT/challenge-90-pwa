@@ -8,8 +8,8 @@ const AppHeader: React.FC<AppHeaderInterface> = props => {
     const router = useRouter()
 
     return (
-        <Container>
-            <Content>
+        <Container preventAnimation>
+            <Content preventAnimation>
                 <Nav>
                     <Slot>
                         {backTo && (

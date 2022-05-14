@@ -14,9 +14,13 @@ export class AlertService {
         hideProgressBar: false
     }
 
+    hideAll() {
+        toast.dismiss()
+    }
     show(message: string, config?: AlertConfigType) {
         toast(message, { ...this.defaultConfig, ...config })
     }
+
     info(message: string, config?: AlertConfigType) {
         toast.info(message, { ...this.defaultConfig, ...config })
     }

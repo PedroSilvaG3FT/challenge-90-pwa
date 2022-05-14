@@ -24,25 +24,25 @@ const Menu: React.FC = () => {
     const [selectedDay, setSelectedDay] = useState<MenuDayInterface>(
         {} as MenuDayInterface
     )
+
     useEffect(() => {
+        if (menu.menuId) initCurrentDay()
         getMenuUser()
     }, [])
 
     const getMenuUser = async () => {
         try {
             const { data } = await menuService.getById(Number(user.id))
-
             menuActions.setMenu(data)
-            initCurrentDay()
         } catch (error: ResponseErrorInterface) {
-            alertService.error(error.response.data.message)
+            alertService.hideAll()
+            alertService.error('Ocorreu um erro ao atulaziar cárdapio')
         }
     }
 
     const initCurrentDay = () => {
         if (!menu.days) return
         const current = new Date().getDay() + 1
-        console.log('|||||||||||', menu)
         const [first] = menu.days.filter(
             ({ numberDay }) => numberDay === current
         )
@@ -60,19 +60,28 @@ const Menu: React.FC = () => {
             <AppHead title="Cardápio" showHeader backTo="/home" />
 
             <Container showHeader>
-                <MenuTitle
-                    title={menu.menuName}
-                    subtitle={`Periodo: ${menu.qtdDays}`}
-                />
+                {menu.menuId ? (
+                    <>
+                        <MenuTitle
+                            title={menu.menuName}
+                            subtitle={`Periodo: ${menu.qtdDays}`}
+                        />
 
-                <SelectionDay
-                    days={menu.days}
-                    current={currentDay}
-                    selected={selectedDay}
-                    onSelect={onSelectDay}
-                />
+                        <SelectionDay
+                            days={menu.days}
+                            current={currentDay}
+                            selected={selectedDay}
+                            onSelect={onSelectDay}
+                        />
 
-                <CardDay data={selectedDay} />
+                        <CardDay data={selectedDay} />
+                    </>
+                ) : (
+                    <MenuTitle
+                        title={'Sem Cardapio'}
+                        subtitle={`Solicite ao administrador`}
+                    />
+                )}
             </Container>
         </>
     )

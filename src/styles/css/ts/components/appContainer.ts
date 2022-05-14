@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 interface AppContainerProps {
     showHeader?: boolean
+    preventAnimation?: boolean
 }
 
 export const AppContainer = styled.section<AppContainerProps>`
@@ -12,8 +13,8 @@ export const AppContainer = styled.section<AppContainerProps>`
             ? `calc(${props.theme.spacing.headerHeight} + 12px)`
             : '1rem'
     }};
+    animation: ${props => (props.preventAnimation ? '' : 'fadein 1s')};
 
-    animation: fadein 1s;
     @media (min-width: 1200px) {
         max-width: 1440px;
     }

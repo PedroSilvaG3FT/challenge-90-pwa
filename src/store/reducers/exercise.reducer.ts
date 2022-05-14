@@ -13,11 +13,15 @@ const { actions: mutations, reducer } = createSlice({
     reducers: {
         setExercise(state, { payload }) {
             state.exercises = payload
+        },
+        clearState(state) {
+            state.exercises = []
         }
     }
 })
 
 export const exerciseActions = {
+    clearState: () => store.dispatch(mutations.clearState()),
     setExercise: (payload: ExerciseDayInterface[]) =>
         store.dispatch(mutations.setExercise(payload))
 }

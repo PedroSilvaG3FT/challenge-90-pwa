@@ -13,11 +13,15 @@ const { actions: mutations, reducer } = createSlice({
     reducers: {
         setRegisterModel(state, { payload }) {
             state.model = payload
+        },
+        clearState(state) {
+            state.model = {} as RegisterFormInterface
         }
     }
 })
 
 export const registerActions = {
+    clearState: () => store.dispatch(mutations.clearState()),
     setRegisterModel: (payload: RegisterFormInterface) =>
         store.dispatch(mutations.setRegisterModel(payload))
 }

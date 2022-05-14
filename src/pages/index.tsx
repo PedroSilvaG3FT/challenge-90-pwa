@@ -1,10 +1,10 @@
+import { useMapState } from '@/hooks'
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import Logo from '@/assets/images/logo.png'
 import AppHead from '@/components/common/app-head'
 import AuthModal from '@/components/common/modals/auth-modal'
-import { Container, Content, Image, Button } from '@/styles/pages/home'
-import { useMapState } from '@/hooks'
+import { Container, Content, Image, Button } from '@/styles/pages/wellcome'
 import { AuthStateInterface } from '@/store/@interfaces/authState.interface'
 
 const Wellcome: React.FC = () => {
