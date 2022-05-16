@@ -1,8 +1,14 @@
-import React, { useEffect } from 'react'
 import * as yup from 'yup'
+import { useMapState } from '@/hooks'
+import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import { useMask } from '@/hooks/mask.hook'
 import { yupResolver } from '@hookform/resolvers/yup'
-
+import { UserService } from '@/services/user.service'
+import { AlertService } from '@/services/_alert.service'
+import { authActions } from '@/store/reducers/auth.reducer'
+import { AuthStateInterface } from '@/store/@interfaces/authState.interface'
+import { ResponseErrorInterface } from '@/interfaces/_response-error.interface'
 import {
     Container,
     FormGroup,
@@ -13,13 +19,6 @@ import {
     Span,
     Row
 } from './styles'
-import { useMask } from '@/hooks/mask.hook'
-import { useMapState } from '@/hooks'
-import { AuthStateInterface } from '@/store/@interfaces/authState.interface'
-import { AlertService } from '@/services/_alert.service'
-import { UserService } from '@/services/user.service'
-import { ResponseErrorInterface } from '@/interfaces/_response-error.interface'
-import { authActions } from '@/store/reducers/auth.reducer'
 
 const ProfileForm: React.FC = () => {
     const userService = new UserService()
@@ -61,9 +60,6 @@ const ProfileForm: React.FC = () => {
                 height: Number(profileForm.height),
                 phoneNumber: Number(rawPhoneNumber)
             }
-
-            console.log(profileForm)
-            console.log(profileDTO)
 
             await userService.update(profileDTO)
             authActions.setUser({ ...user, ...profileDTO })

@@ -35,8 +35,7 @@ const Menu: React.FC = () => {
             const { data } = await menuService.getById(Number(user.id))
             menuActions.setMenu(data)
         } catch (error: ResponseErrorInterface) {
-            alertService.hideAll()
-            alertService.error('Ocorreu um erro ao atulaziar cárdapio')
+            console.error(error)
         }
     }
 

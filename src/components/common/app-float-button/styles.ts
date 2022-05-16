@@ -5,7 +5,7 @@ import tw from 'twin.macro'
 export const Button = styled(AppButton)`
     ${tw`
         fixed
-        z-50
+        z-40
         w-14
         h-14
         flex

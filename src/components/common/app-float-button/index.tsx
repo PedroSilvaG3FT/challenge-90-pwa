@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
 import { Button } from './styles'
-import { BsPlus } from 'react-icons/bs'
 import FloatItems from './float-items'
+import React, { useState } from 'react'
+import { BsPlus } from 'react-icons/bs'
 import { AppFloatButtonItem } from '@/interfaces/_appFloatButtonItem.interface'
 
 interface AppFloatButtonProps {

@@ -1,6 +1,6 @@
 import { httpClient } from '@/config/axios'
-import { RegisterFormInterface } from '@/interfaces/user-register.interface'
 import UserInterface from '@/interfaces/user.interface'
+import { RegisterFormInterface } from '@/interfaces/user-register.interface'
 
 export class UserService {
     getAll() {

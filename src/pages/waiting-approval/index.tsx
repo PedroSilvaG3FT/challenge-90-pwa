@@ -27,7 +27,7 @@ const WaitingApproval: React.FC = () => {
     }, [])
 
     const backToLogin = () => {
-        authActions.logout()
+        authActions.clearState()
         router.push('/')
     }
 
