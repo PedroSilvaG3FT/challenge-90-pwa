@@ -25,6 +25,7 @@ const Group: React.FC = () => {
     const userService = new UserService()
     const alertService = new AlertService()
     const { group } = useMapState('group') as GroupStateInterface
+    const whatsappURL = 'https://chat.whatsapp.com/HeALxPolsT62QjB0SznzBj'
 
     useEffect(() => {
         getUserList()
@@ -38,6 +39,8 @@ const Group: React.FC = () => {
             alertService.error(error.response.data.message)
         }
     }
+
+    const openWhatsapp = () => window.open(whatsappURL, '_blank')
 
     return (
         <>
@@ -66,7 +69,7 @@ const Group: React.FC = () => {
                     ))}
                 </Grid>
 
-                <Button>
+                <Button onClick={() => openWhatsapp()}>
                     Participe do grupo no WhatsApp
                     <BsWhatsapp />
                 </Button>

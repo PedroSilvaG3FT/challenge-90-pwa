@@ -27,7 +27,7 @@ const CredencialForm: React.FC<CredencialFormProps> = ({ onSubmit }) => {
         <Form onSubmit={handleSubmit(handleSubmitForm)}>
             <FormGroup>
                 <Label>Email</Label>
-                <Input {...register('email')} />
+                <Input type="email" {...register('email')} />
                 <Span>{errors.email?.message}</Span>
             </FormGroup>
 
