@@ -13,13 +13,6 @@ export default createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
-    user-select: none;
-    -ms-user-select: none;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    -webkit-touch-callout: none;
   }
 
   body {
@@ -38,6 +31,6 @@ export default createGlobalStyle`
   }
 
   #__next {
-      height: 100vh;
+    height: 100vh;
   }
 `

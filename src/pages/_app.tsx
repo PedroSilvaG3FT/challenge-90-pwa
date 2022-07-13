@@ -6,10 +6,10 @@ import { Provider } from 'react-redux'
 import { useRouter } from 'next/router'
 import Layout from '@/components/ui/layout'
 import { persistStore } from 'redux-persist'
-import { PersistGate } from 'redux-persist/integration/react'
-import EncouragingInstallIOS from '@/components/common/modals/encouraging-install-ios'
 import { SessionStorage } from '@/store/session'
+import { PersistGate } from 'redux-persist/integration/react'
 import { SHOW_REQUEST_INSTALL } from '@/contants/session-keys'
+import EncouragingInstallIOS from '@/components/common/modals/encouraging-install-ios'
 
 const persistor = persistStore(store)
 

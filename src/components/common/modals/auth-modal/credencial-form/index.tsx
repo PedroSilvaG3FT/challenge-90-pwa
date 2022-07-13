@@ -30,13 +30,11 @@ const CredencialForm: React.FC<CredencialFormProps> = ({ onSubmit }) => {
                 <Input type="email" {...register('email')} />
                 <Span>{errors.email?.message}</Span>
             </FormGroup>
-
             <FormGroup>
                 <Label>Senha</Label>
                 <Input {...register('password')} type="password" />
                 <Span>{errors.password?.message}</Span>
             </FormGroup>
-
             <Button type="submit">Login</Button>
         </Form>
     )

@@ -3,7 +3,7 @@
 const withPWA = require('next-pwa')
 const withImages = require('next-images')
 const withPlugins = require('next-compose-plugins')
-
+const runtimeCaching = require('next-pwa/cache')
 const nextConfig = { reactStrictMode: true }
 
 module.exports = withPlugins([
@@ -21,10 +21,13 @@ module.exports = withPlugins([
         withPWA,
         {
             pwa: {
-                disable: process.env.NODE_ENV === 'development',
                 dest: 'public',
                 register: true,
-                sw: '/sw.js'
+                skipWaiting: true
+                // disable: false,
+                // dest: 'public',
+                // register: true,
+                // sw: '/sw.js'
             }
         }
     ]
