@@ -30,8 +30,8 @@ const EncouragingInstallIOS: React.FC<EncouragingInstallIOSProps> = props => {
                 </Title>
 
                 <Text>
-                    Clique em <IoShareOutline /> depois em 'Adicionar à Tela de
-                    início'
+                    Clique em <IoShareOutline /> depois em
+                    {` 'Adicionar à Tela de início'`}
                 </Text>
             </Container>
         </AppModal>
