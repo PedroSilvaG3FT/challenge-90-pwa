@@ -5,7 +5,7 @@ import { Container, Article, Content, Title, Text } from './styles'
 
 const UserGoals: React.FC = () => {
     const { user } = useMapState('auth') as AuthStateInterface
-    const [firstName] = user.name.split(' ')
+    const [firstName] = user.name ? user.name.split(' ') : ['']
 
     const items = [
         { label: 'Peso Atual', value: user.currentWeight },

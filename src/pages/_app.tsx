@@ -21,6 +21,8 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
 
     useEffect(() => {
+        console.log('TOKEN :', token)
+        console.log('user :', user)
         if (token && !user.acceptTerm) router.push('term')
         else if (token && !user.active) router.push('waiting-approval')
 

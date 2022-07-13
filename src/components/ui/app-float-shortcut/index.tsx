@@ -13,7 +13,7 @@ import { AppFloatButtonItem } from '@/interfaces/_appFloatButtonItem.interface'
 
 const AppFloatShortcut: React.FC = () => {
     const router = useRouter()
-    const hideScreens = ['/', '/group']
+    const hideScreens = ['/', '/group', '/term', '/waiting-approval']
     const [isModalOpen, setIsModalOpen] = useState(false)
     const hideButton = hideScreens.includes(router.pathname)
     const { user } = useMapState('auth') as AuthStateInterface

@@ -14,17 +14,7 @@ export const AppContainer = styled.section<AppContainerProps>`
             : '1rem'
     }};
 
-    animation: fadein 1s;
     @media (min-width: 1200px) {
         max-width: 1440px;
-    }
-
-    @keyframes fadein {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
     }
 `
