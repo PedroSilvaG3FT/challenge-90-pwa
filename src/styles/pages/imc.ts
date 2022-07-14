@@ -5,7 +5,7 @@ import bgSport from '@/assets/images/bg-sport.png'
 import { AppContainer } from '@/styles/css/ts/components'
 
 export const Container = styled(AppContainer)`
-    ${tw`min-h-full`}
+    ${tw`min-h-full flex flex-col justify-center items-center`}
     background-size: 90% !important;
 
     background: ${props => {

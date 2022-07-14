@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { IMC_DESCRIPTION, IMC_TYPES } from '@/contants/imc'
-import { IMCFormInterface } from '@/interfaces/imc.interface'
 import { Form, Card, Text, Input } from './styles'
+import { IMCService } from '@/services/_imc.service'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { IMCFormInterface } from '@/interfaces/imc.interface'
 
 interface IMCFormProps {
     initialState?: IMCFormInterface
@@ -13,6 +13,8 @@ interface IMCFormProps {
 
 const IMCForm: React.FC<IMCFormProps> = props => {
     const { initialState, onResult } = props
+    const imcService = new IMCService()
+
     const imcForm = yup.object().shape({
         height: yup.string().required('Insira a sua Altura'),
         weight: yup.string().required('Insira o peso')
@@ -27,59 +29,33 @@ const IMCForm: React.FC<IMCFormProps> = props => {
     }, [])
 
     useEffect(() => {
-        const subscription = watch(value => onFormChange(value))
+        const subscription = watch(value => updateResult(value))
         return () => subscription.unsubscribe()
     }, [watch])
 
-    function calcularIMC(weight: number, height: number) {
-        height = height / 100
-        return weight / (height * height)
-    }
+    const getFormValue = (model: IMCFormInterface) => {
+        const weight = Number(model.weight)
+        const height = Number(imcService.convertToCm(model.height))
 
-    function getIMCType(imc: number) {
-        if (imc < 17) return IMC_TYPES.veryUnderweight
-        else if (imc > 17 && imc <= 18.49) return IMC_TYPES.underweight
-        else if (imc >= 18.5 && imc <= 24.99) return IMC_TYPES.normal
-        else if (imc >= 25 && imc <= 29.99) return IMC_TYPES.overweight
-        else if (imc >= 30 && imc <= 34.99) return IMC_TYPES.obesityOne
-        else return IMC_TYPES.obesityOne
-    }
-
-    const validIMC = (weight: number, height: number) => {
-        const imc = calcularIMC(weight, height)
-        const imcType = getIMCType(imc)
-
-        return imcType
-    }
-
-    const convertToCm = (value: number | string) => {
-        const initial = typeof value === 'number' ? String(value) : value
-
-        return initial.replace('.', '')
+        return { weight, height }
     }
 
     const initForm = () => {
         if (!initialState) return
 
-        const weight = Number(convertToCm(initialState.height))
-        const height = Number(convertToCm(initialState.weight))
+        const { weight, height } = getFormValue(initialState)
 
         setValue('weight', weight)
         setValue('height', height)
 
-        const result = validIMC(weight, height)
-        onResult(result)
+        updateResult({ weight, height })
     }
 
-    const onFormChange = (imcFormModel: any) => {
-        imcFormModel.height = convertToCm(imcFormModel.height)
-
-        const weight = Number(imcFormModel.weight)
-        const height = Number(imcFormModel.height)
-
+    const updateResult = (imcFormModel: any) => {
+        const { weight, height } = getFormValue(imcFormModel)
         if (!weight || !height) return
 
-        const result = validIMC(weight, height)
+        const result = imcService.getResult(weight, height)
         onResult(result)
     }
 

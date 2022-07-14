@@ -7,7 +7,7 @@ export const Container = styled(AppContainer)`
 `
 
 export const Image = styled.img`
-    ${tw`w-40 mb-12`}
+    ${tw`w-3/4 mb-12`}
 `
 
 export const Paragraph = styled.p`

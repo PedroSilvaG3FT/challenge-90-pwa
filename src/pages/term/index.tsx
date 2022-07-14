@@ -5,11 +5,13 @@ import AppHead from '@/components/common/app-head'
 import { UserService } from '@/services/user.service'
 import { AlertService } from '@/services/_alert.service'
 import { authActions } from '@/store/reducers/auth.reducer'
+import BubbleTextImg from '@/assets/images/animated/bubble-text.gif'
 import { AuthStateInterface } from '@/store/@interfaces/authState.interface'
 import { ResponseErrorInterface } from '@/interfaces/_response-error.interface'
 import {
     Container,
     Button,
+    Image,
     Paragraph,
     TextHighlight
 } from '@/styles/pages/term'
@@ -38,6 +40,8 @@ const Term: React.FC = () => {
             <AppHead title="Termos" />
 
             <Container>
+                <Image src={BubbleTextImg} alt="termo" />
+
                 <Paragraph>
                     O <TextHighlight>izacdesafio90dias</TextHighlight>, é um
                     aplicativo que te dá um resultado satisfatório em curto

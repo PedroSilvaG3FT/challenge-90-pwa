@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import store from '@/store'
+import { Container } from '@/styles/pages/imc'
 import IMCForm from '@/components/imc/imc-form'
 import AppHead from '@/components/common/app-head'
-import { Container } from '@/styles/pages/exercise'
+import IMCResult from '@/components/imc/imc-result'
 import { IMCFormInterface } from '@/interfaces/imc.interface'
-import { IMC_DESCRIPTION } from '@/contants/imc'
 
 const IMC: React.FC = () => {
-    const [result, setResult] = useState('')
+    const [result, setResult] = useState(0)
     const state = store.getState()
     const { user } = state.auth
 
@@ -17,7 +17,7 @@ const IMC: React.FC = () => {
     }
 
     const onResultChange = (imcType: number) => {
-        setResult(IMC_DESCRIPTION[imcType])
+        setResult(imcType)
     }
 
     return (
@@ -30,7 +30,7 @@ const IMC: React.FC = () => {
                     onResult={onResultChange}
                 />
 
-                {result}
+                <IMCResult imcType={result} />
             </Container>
         </>
     )

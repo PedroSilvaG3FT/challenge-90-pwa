@@ -6,6 +6,7 @@ import AppHead from '@/components/common/app-head'
 import { UserService } from '@/services/user.service'
 import { AlertService } from '@/services/_alert.service'
 import { authActions } from '@/store/reducers/auth.reducer'
+import SupportImg from '@/assets/images/animated/support.gif'
 import { AuthStateInterface } from '@/store/@interfaces/authState.interface'
 import { ResponseErrorInterface } from '@/interfaces/_response-error.interface'
 import {
@@ -50,7 +51,7 @@ const WaitingApproval: React.FC = () => {
             <AppHead title="Aguardando Aprovação" />
 
             <Container>
-                <Image src={Customer} />
+                <Image src={SupportImg} alt="Verificando" />
 
                 <Paragraph>
                     Estamos avaliando o seu perfil para indicar o melhor caminho

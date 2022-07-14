@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import { useMapState } from '@/hooks'
 import AppHead from '@/components/common/app-head'
-import { Container } from '@/styles/pages/exercise'
 import { AlertService } from '@/services/_alert.service'
 import { ExerciseService } from '@/services/exercice.service'
 import ExerciseList from '@/components/exercice/exercise-list'
+import ExerciseImg from '@/assets/images/animated/exercise.gif'
 import { exerciseActions } from '@/store/reducers/exercise.reducer'
+import { Container, ImageContainer, Image } from '@/styles/pages/exercise'
 import { AuthStateInterface } from '@/store/@interfaces/authState.interface'
 import { ResponseErrorInterface } from '@/interfaces/_response-error.interface'
 import { ExerciseStateInterface } from '@/store/@interfaces/exerciseState.interface'
@@ -35,6 +36,9 @@ const Exercise: React.FC = () => {
 
             <Container showHeader>
                 <ExerciseList exercises={exercises} />
+                <ImageContainer>
+                    <Image src={ExerciseImg} alt="" />
+                </ImageContainer>
             </Container>
         </>
     )

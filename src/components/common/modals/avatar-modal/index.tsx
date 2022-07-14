@@ -24,11 +24,6 @@ const AvatarModal: React.FC<AvatarModalProps> = props => {
 
     const { avatarList } = useMapState('avatar') as AvatarStateInterface
 
-    const cardClassName = (url: string) => {
-        if (url === selected?.imageUrl) return 'selected'
-        else return ''
-    }
-
     useEffect(() => {
         getAvatarList()
     }, [])
@@ -46,7 +41,7 @@ const AvatarModal: React.FC<AvatarModalProps> = props => {
         <AppModal
             width="90vw"
             maxWidth={420}
-            maxHeight={420}
+            maxHeight="70vh"
             isOpen={isOpen}
             onClickClose={onClose}
             onBackdropClick={onBackdropClick}

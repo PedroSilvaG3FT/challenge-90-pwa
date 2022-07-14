@@ -105,7 +105,7 @@ const Measurements: React.FC = () => {
                     </FormGroup>
 
                     <FormGroup>
-                        <Label>Alturan (m)</Label>
+                        <Label>Altura (m)</Label>
                         <Input
                             {...register('height')}
                             type="number"
