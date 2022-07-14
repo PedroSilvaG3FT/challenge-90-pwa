@@ -1,4 +1,5 @@
 import { IMC_TYPES } from '@/contants/imc'
+import { IMCResultInterface } from '@/interfaces/imc.interface'
 
 export class IMCService {
     private calc(weight: number, height: number) {
@@ -14,11 +15,10 @@ export class IMCService {
         const initial = typeof value === 'number' ? String(value) : value
         return initial.replace('.', '')
     }
-    getResult(weight: number, height: number) {
-        const imc = this.calc(weight, height)
-        const imcType = this.getType(imc)
+    getResult(weight: number, height: number): IMCResultInterface {
+        const value = this.calc(weight, height)
+        const type = this.getType(value)
 
-        console.log('IMC :', imc)
-        return imcType
+        return { type, value }
     }
 }

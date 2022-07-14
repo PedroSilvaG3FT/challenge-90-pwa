@@ -15,10 +15,12 @@ export const Container = styled(AppContainer)`
 `
 
 export const ImageContainer = styled.figure`
-    ${tw`w-full flex flex-col items-center rounded-lg`}
+    ${tw`w-full flex py-4 flex-col items-center rounded-lg`}
     background: ${({ theme }) => theme.colors.bgSecondary};
 `
 
 export const Image = styled.img`
     ${tw`w-8/12`}
 `
+
+export const Text = styled.p``

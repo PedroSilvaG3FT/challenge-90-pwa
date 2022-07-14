@@ -4,11 +4,14 @@ import { useForm } from 'react-hook-form'
 import { Form, Card, Text, Input } from './styles'
 import { IMCService } from '@/services/_imc.service'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { IMCFormInterface } from '@/interfaces/imc.interface'
+import {
+    IMCFormInterface,
+    IMCResultInterface
+} from '@/interfaces/imc.interface'
 
 interface IMCFormProps {
     initialState?: IMCFormInterface
-    onResult: (value: number) => void
+    onResult: (value: IMCResultInterface) => void
 }
 
 const IMCForm: React.FC<IMCFormProps> = props => {

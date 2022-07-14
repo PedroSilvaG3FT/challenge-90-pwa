@@ -4,10 +4,14 @@ import { Container } from '@/styles/pages/imc'
 import IMCForm from '@/components/imc/imc-form'
 import AppHead from '@/components/common/app-head'
 import IMCResult from '@/components/imc/imc-result'
-import { IMCFormInterface } from '@/interfaces/imc.interface'
+import IMCDetails from '@/components/imc/imc-details'
+import {
+    IMCFormInterface,
+    IMCResultInterface
+} from '@/interfaces/imc.interface'
 
 const IMC: React.FC = () => {
-    const [result, setResult] = useState(0)
+    const [result, setResult] = useState({} as IMCResultInterface)
     const state = store.getState()
     const { user } = state.auth
 
@@ -16,8 +20,8 @@ const IMC: React.FC = () => {
         weight: user.currentWeight as number
     }
 
-    const onResultChange = (imcType: number) => {
-        setResult(imcType)
+    const onResultChange = (result: IMCResultInterface) => {
+        setResult(result)
     }
 
     return (
@@ -30,7 +34,8 @@ const IMC: React.FC = () => {
                     onResult={onResultChange}
                 />
 
-                <IMCResult imcType={result} />
+                <IMCResult imcType={result.type} />
+                <IMCDetails result={result} />
             </Container>
         </>
     )

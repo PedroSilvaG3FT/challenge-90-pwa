@@ -6,9 +6,9 @@ import { ExerciseService } from '@/services/exercice.service'
 import ExerciseList from '@/components/exercice/exercise-list'
 import ExerciseImg from '@/assets/images/animated/exercise.gif'
 import { exerciseActions } from '@/store/reducers/exercise.reducer'
-import { Container, ImageContainer, Image } from '@/styles/pages/exercise'
 import { AuthStateInterface } from '@/store/@interfaces/authState.interface'
 import { ResponseErrorInterface } from '@/interfaces/_response-error.interface'
+import { Container, ImageContainer, Image, Text } from '@/styles/pages/exercise'
 import { ExerciseStateInterface } from '@/store/@interfaces/exerciseState.interface'
 
 const Exercise: React.FC = () => {
@@ -36,9 +36,14 @@ const Exercise: React.FC = () => {
 
             <Container showHeader>
                 <ExerciseList exercises={exercises} />
-                <ImageContainer>
-                    <Image src={ExerciseImg} alt="" />
-                </ImageContainer>
+
+                {!exercises.length && (
+                    <ImageContainer>
+                        <Image src={ExerciseImg} alt="Sem exercicios" />
+                        <Text>Sem exercicios cadastrados</Text>
+                        <Text> solicite ao administrador</Text>
+                    </ImageContainer>
+                )}
             </Container>
         </>
     )
