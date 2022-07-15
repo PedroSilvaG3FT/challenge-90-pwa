@@ -30,10 +30,15 @@ const Menu: React.FC = () => {
         getMenuUser()
     }, [])
 
+    useEffect(() => {
+        if (menu.menuId) initCurrentDay()
+    }, [menu])
+
     const getMenuUser = async () => {
         try {
             const { data } = await menuService.getById(Number(user.id))
             menuActions.setMenu(data)
+            initCurrentDay()
         } catch (error: ResponseErrorInterface) {
             console.error(error)
         }

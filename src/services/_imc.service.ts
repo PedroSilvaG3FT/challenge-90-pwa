@@ -2,8 +2,10 @@ import { IMC_TYPES } from '@/contants/imc'
 import { IMCResultInterface } from '@/interfaces/imc.interface'
 
 export class IMCService {
-    private calc(weight: number, height: number) {
-        height = height / 100
+    private calc(initialWeight: number, initialheight: number) {
+        const height = initialheight / 100
+        const weight = initialWeight - 4
+
         return weight / (height * height)
     }
     private getType(imc: number) {

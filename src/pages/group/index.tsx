@@ -5,6 +5,7 @@ import React, { useEffect } from 'react'
 import AppHead from '@/components/common/app-head'
 import { UserService } from '@/services/user.service'
 import { AlertService } from '@/services/_alert.service'
+import { groupActions } from '@/store/reducers/group.reducer'
 import { GroupStateInterface } from '@/store/@interfaces/groupState.interface'
 import { ResponseErrorInterface } from '@/interfaces/_response-error.interface'
 import {
@@ -19,7 +20,6 @@ import {
     Container,
     Separator
 } from '@/styles/pages/group'
-import { groupActions } from '@/store/reducers/group.reducer'
 
 const Group: React.FC = () => {
     const userService = new UserService()

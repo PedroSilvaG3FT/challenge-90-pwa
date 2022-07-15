@@ -3,6 +3,7 @@ import 'react-toastify/dist/ReactToastify.css'
 
 import { createGlobalStyle } from 'styled-components'
 import tw from 'twin.macro'
+import 'animate.css'
 
 export default createGlobalStyle`
    :root {

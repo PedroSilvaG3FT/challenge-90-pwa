@@ -6,6 +6,7 @@ import Summary from '@/components/home/user-detail/summary'
 import UserGoals from '@/components/home/user-detail/user-goals'
 import { Container, Content, Article, Image, Separator, Button } from './styles'
 import { AuthStateInterface } from '@/store/@interfaces/authState.interface'
+import ScrollAnimation from '@/components/ui/scroll-animation'
 
 const UserDetail: React.FC = () => {
     const router = useRouter()
@@ -14,20 +15,22 @@ const UserDetail: React.FC = () => {
     const goToProfile = () => router.push('/profile')
 
     return (
-        <Container>
-            <Content>
-                <Article>
-                    <Image src={user.image || Avatar} />
-                    <UserGoals />
-                </Article>
+        <ScrollAnimation animation="fadeInDown">
+            <Container>
+                <Content>
+                    <Article>
+                        <Image src={user.image || Avatar} />
+                        <UserGoals />
+                    </Article>
 
-                <Separator />
+                    <Separator />
 
-                <Summary />
+                    <Summary />
 
-                <Button onClick={goToProfile}>Perfil</Button>
-            </Content>
-        </Container>
+                    <Button onClick={goToProfile}>Perfil</Button>
+                </Content>
+            </Container>
+        </ScrollAnimation>
     )
 }
 

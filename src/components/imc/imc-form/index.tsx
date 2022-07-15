@@ -8,6 +8,7 @@ import {
     IMCFormInterface,
     IMCResultInterface
 } from '@/interfaces/imc.interface'
+import ScrollAnimation from '@/components/ui/scroll-animation'
 
 interface IMCFormProps {
     initialState?: IMCFormInterface
@@ -64,15 +65,19 @@ const IMCForm: React.FC<IMCFormProps> = props => {
 
     return (
         <Form>
-            <Card>
-                <Text>Peso</Text>
-                <Input type="text" {...register('weight')} />
-            </Card>
+            <ScrollAnimation animation="fadeInLeft">
+                <Card>
+                    <Text>Peso</Text>
+                    <Input type="number" {...register('weight')} />
+                </Card>
+            </ScrollAnimation>
 
-            <Card>
-                <Text>Altura</Text>
-                <Input type="text" {...register('height')} />
-            </Card>
+            <ScrollAnimation animation="fadeInRight">
+                <Card>
+                    <Text>Altura</Text>
+                    <Input type="number" {...register('height')} />
+                </Card>
+            </ScrollAnimation>
         </Form>
     )
 }
