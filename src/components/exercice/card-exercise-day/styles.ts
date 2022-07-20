@@ -1,11 +1,13 @@
 import styled from 'styled-components'
 import tw from 'twin.macro'
 
-export const Card = styled.article`
-    ${tw`min-h-[5rem] my-4 p-4 rounded-br-lg w-full text-sm`}
+const animationFadeInLeft = {
+    className: 'animate__animated animate__fadeInLeft'
+}
+
+export const Container = styled.div.attrs(animationFadeInLeft)`
+    ${tw`w-full min-h-[5rem] my-4 p-4 text-sm rounded-br-lg`}
     background: ${props => props.theme.colors.bgSecondary};
-    box-shadow: ${props =>
-        props.theme.boxShadow.center(props.theme.colors.bgSecondary)};
 
     &:first-of-type {
         ${tw`mt-0`}
@@ -15,36 +17,6 @@ export const Card = styled.article`
     }
 `
 
-export const CardExercice = styled.article`
-    ${tw`p-2 rounded self-stretch flex items-center justify-center flex-col`}
-    font-size: 90%;
-    background: ${props => props.theme.colors.bgPrimary};
-    box-shadow: ${props =>
-        props.theme.boxShadow.center(props.theme.colors.bgPrimary)};
-
-    &.video-mode {
-        background: ${props => props.theme.colors.primary};
-        box-shadow: ${props =>
-            props.theme.boxShadow.center(props.theme.colors.primary)};
-    }
-`
-
-export const VideoContainer = styled.div`
-    ${tw`flex items-center justify-center flex-col`}
-
-    > svg {
-        ${tw`text-[2rem] mb-2`}
-    }
-`
-
-export const Article = styled.article`
-    ${tw`grid gap-2 grid-cols-2 `}
-`
-
 export const Title = styled.p`
     ${tw`text-center mb-2 font-bold`}
-`
-
-export const Text = styled.p`
-    ${tw`text-center`}
 `

@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import tw from 'twin.macro'
 
 export const Container = styled.section`
-    ${tw`w-full rounded px-4 py-3 flex justify-between`}
+    ${tw`w-full rounded-lg px-4 py-3 flex justify-between`}
     background: ${props => props.theme.colors.bgPrimary};
 `
 

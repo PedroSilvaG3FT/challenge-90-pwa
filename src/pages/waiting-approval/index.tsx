@@ -34,9 +34,9 @@ const WaitingApproval: React.FC = () => {
 
     const getUser = async () => {
         try {
-            const { data } = await userService.getById(user.id as number)
+            if (!user.id) return
+            const { data } = await userService.getById(user.id)
 
-            console.log('USER :', data)
             if (data.active) {
                 authActions.setUser({ ...user, ...data, active: true })
                 router.push('/home')

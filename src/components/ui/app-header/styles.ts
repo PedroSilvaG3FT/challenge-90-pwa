@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { AppButton, AppContainer } from '@/styles/css/ts/components'
 
 export const Container = styled(AppContainer)`
-    ${tw`p-0 fixed w-full max-w-full`}
+    ${tw`p-0 fixed w-full max-w-full z-20`}
 `
 
 export const Content = styled(AppContainer)`

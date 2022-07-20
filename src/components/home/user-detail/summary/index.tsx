@@ -16,7 +16,6 @@ interface SummaryItem {
 const Summary: React.FC = () => {
     const [items, setItems] = useState<SummaryItem[]>([])
     const { user } = useMapState('auth') as AuthStateInterface
-
     useEffect(() => initSummary(), [user])
 
     const getPercent = (value: number, max: number) => (value * 100) / max

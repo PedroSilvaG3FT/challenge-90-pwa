@@ -3,7 +3,11 @@ import { rgba } from 'polished'
 import styled from 'styled-components'
 import bgFood from '@/assets/images/bg-food.png'
 
-export const Card = styled.article`
+const animatefadeInLeft = {
+    className: 'animate__animated animate__fadeInLeft'
+}
+
+export const Card = styled.article.attrs(animatefadeInLeft)`
     ${tw`p-6 h-36 rounded-lg flex flex-col justify-center items-center`}
 
     background-size: 90% !important;

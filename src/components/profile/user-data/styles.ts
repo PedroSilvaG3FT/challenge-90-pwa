@@ -1,7 +1,11 @@
 import styled from 'styled-components'
 import tw from 'twin.macro'
 
-export const Container = styled.section`
+const animatefadeInDown = {
+    className: 'animate__animated animate__fadeInDown'
+}
+
+export const Container = styled.section.attrs(animatefadeInDown)`
     ${tw`relative flex items-center p-4 rounded-lg`}
     background: ${props => props.theme.colors.bgSecondary};
     box-shadow: ${({ theme }) =>

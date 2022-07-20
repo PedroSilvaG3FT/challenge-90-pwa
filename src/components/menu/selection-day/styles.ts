@@ -1,7 +1,11 @@
 import styled from 'styled-components'
 import tw from 'twin.macro'
 
-export const Container = styled.section`
+const animatefadeInUp = {
+    className: 'animate__animated animate__fadeInUp'
+}
+
+export const Container = styled.section.attrs(animatefadeInUp)`
     ${tw`my-4 px-2  rounded-lg`}
     background: ${props => props.theme.colors.bgSecondary};
 `

@@ -3,4 +3,8 @@ import tw from 'twin.macro'
 
 export const Container = styled.section`
     ${tw`relative`}
+
+    .CircularProgressbar-text {
+        ${tw`text-[18px]`}
+    }
 `

@@ -2,7 +2,11 @@ import tw from 'twin.macro'
 import styled from 'styled-components'
 import { AppFormGroup, AppButton } from '@/styles/css/ts/components'
 
-export const Container = styled.section`
+const animatefadeInLeft = {
+    className: 'animate__animated animate__fadeInLeft'
+}
+
+export const Container = styled.section.attrs(animatefadeInLeft)`
     ${tw`p-4 mt-8 rounded-lg flex items-center`}
 
     background: ${props => props.theme.colors.bgSecondary};

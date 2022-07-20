@@ -16,6 +16,7 @@ import { ResponseErrorInterface } from '@/interfaces/_response-error.interface'
 const Menu: React.FC = () => {
     const menuService = new MenuService()
     const alertService = new AlertService()
+
     const { user } = useMapState('auth') as AuthStateInterface
     const { menu } = useMapState('menu') as MenuStateInterface
     const [currentDay, setCurrentDay] = useState<MenuDayInterface>(
@@ -26,12 +27,11 @@ const Menu: React.FC = () => {
     )
 
     useEffect(() => {
-        if (menu.menuId) initCurrentDay()
         getMenuUser()
     }, [])
 
     useEffect(() => {
-        if (menu.menuId) initCurrentDay()
+        // if (menu.menuId) initCurrentDay()
     }, [menu])
 
     const getMenuUser = async () => {
@@ -46,6 +46,7 @@ const Menu: React.FC = () => {
 
     const initCurrentDay = () => {
         if (!menu.days) return
+
         const current = new Date().getDay() + 1
         const [first] = menu.days.filter(
             ({ numberDay }) => numberDay === current

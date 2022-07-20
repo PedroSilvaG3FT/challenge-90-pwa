@@ -64,8 +64,8 @@ const UpdateWeightModal: React.FC<UpdateWeightModalProps> = props => {
                     <Input
                         {...register('weight')}
                         type="number"
-                        min="0"
                         step="0.1"
+                        min="0"
                     />
                     <Span>{errors.weight?.message}</Span>
                 </FormGroup>

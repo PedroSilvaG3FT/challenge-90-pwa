@@ -1,47 +1,25 @@
 import React from 'react'
-import { AiOutlinePlayCircle } from 'react-icons/ai'
+import { Container } from './styles'
+import ExerciseVideo from './exercise-video'
+import ExerciseDetail from './exercise-detail'
 import { ExerciseInterface } from '@/interfaces/exercise.interface'
-import {
-    Card,
-    Text,
-    Title,
-    Article,
-    CardExercice,
-    VideoContainer
-} from './styles'
 
 interface CardExerciseDayProps {
     exercises: ExerciseInterface[]
 }
 
 const CardExerciseDay: React.FC<CardExerciseDayProps> = ({ exercises }) => {
-    const openURL = (url: string) => window.open(url, '_blank')
+    const renderExercise = (exercice: ExerciseInterface, index: number) => {
+        if (!exercice.isLink)
+            return <ExerciseDetail key={index} exercise={exercice} />
+
+        return <ExerciseVideo key={index} exercise={exercice} />
+    }
 
     return (
-        <Card>
-            <Article>
-                {exercises.map((item, index) => (
-                    <CardExercice
-                        key={index}
-                        className={item.isLink ? 'video-mode' : ''}
-                    >
-                        {!item.isLink ? (
-                            <>
-                                <Title>{item.exercice.name}</Title>
-                                <Text>{item.amount}</Text>
-                            </>
-                        ) : (
-                            <VideoContainer
-                                onClick={() => openURL(item.linkUrl)}
-                            >
-                                <AiOutlinePlayCircle />
-                                <Text>Clique para assistir</Text>
-                            </VideoContainer>
-                        )}
-                    </CardExercice>
-                ))}
-            </Article>
-        </Card>
+        <Container>
+            {exercises.map((item, index) => renderExercise(item, index))}
+        </Container>
     )
 }
 

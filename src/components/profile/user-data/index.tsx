@@ -85,7 +85,6 @@ const UserData: React.FC = () => {
 
                 <Section>
                     <Text>{user.name}</Text>
-                    <Label>{user.email}</Label>
 
                     <Separator />
 
