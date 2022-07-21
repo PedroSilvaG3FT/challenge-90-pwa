@@ -1,8 +1,10 @@
 import React from 'react'
 import * as yup from 'yup'
+import Link from 'next/link'
 import { useMapState } from '@/hooks'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
+import { useMask } from '@/hooks/mask.hook'
 import AppHead from '@/components/common/app-head'
 import ResumeIcon from '@/assets/icons/resume.png'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -20,7 +22,6 @@ import {
     Span,
     Separator
 } from '@/styles/pages/register'
-import { useMask } from '@/hooks/mask.hook'
 
 const PersonalData: React.FC = () => {
     const router = useRouter()
@@ -106,6 +107,8 @@ const PersonalData: React.FC = () => {
 
                     <Button type="submit">Avançar</Button>
                 </Form>
+
+                <Link href="/">Voltar para Login</Link>
             </Container>
         </>
     )

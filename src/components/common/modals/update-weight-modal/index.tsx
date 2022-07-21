@@ -9,6 +9,7 @@ import { AppModalInterface } from '@/interfaces/modal.interface'
 import { Form, FormGroup, Button, Input, Label, Span } from './styled'
 import { ResponseErrorInterface } from '@/interfaces/_response-error.interface'
 import { AuthStateInterface } from '@/store/@interfaces/authState.interface'
+import { authActions } from '@/store/reducers/auth.reducer'
 
 interface UpdateWeightModalProps extends AppModalInterface {
     onUpdate: (data: number) => void
@@ -44,8 +45,12 @@ const UpdateWeightModal: React.FC<UpdateWeightModalProps> = props => {
             await weightService.create(updateWeightDTO)
             onUpdate(updateWeightDTO.weight)
             setValue('weight', '')
+            authActions.setUser({
+                ...user,
+                currentWeight: updateWeightDTO.weight
+            })
         } catch (error: ResponseErrorInterface) {
-            console.log('ERROR :', error)
+            console.error('ERROR :', error)
         }
     }
 

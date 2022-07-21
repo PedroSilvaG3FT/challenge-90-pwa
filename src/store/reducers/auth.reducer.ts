@@ -1,10 +1,12 @@
 import store from '@/store'
 import { createSlice } from '@reduxjs/toolkit'
+import { USER_TYPE } from '@/contants/user-type'
 import UserInterface from '@/interfaces/user.interface'
 import { AuthStateInterface } from '../@interfaces/authState.interface'
 
 const initialState: AuthStateInterface = {
     token: '',
+    isTypeChallenge: false,
     user: {} as UserInterface
 }
 
@@ -17,6 +19,7 @@ const { actions: mutations, reducer } = createSlice({
         },
         setUser(state, { payload }) {
             state.user = payload
+            state.isTypeChallenge = payload.type === USER_TYPE.challenge
         },
         clearState(state) {
             state.token = ''

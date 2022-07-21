@@ -16,6 +16,7 @@ interface SummaryItem {
 const Summary: React.FC = () => {
     const [items, setItems] = useState<SummaryItem[]>([])
     const { user } = useMapState('auth') as AuthStateInterface
+
     useEffect(() => initSummary(), [user])
 
     const getPercent = (value: number, max: number) => (value * 100) / max
@@ -31,7 +32,7 @@ const Summary: React.FC = () => {
     const getProgressDay = () => {
         const maxDay = 90
         const currentDay = new Date()
-        const initalDay = new Date(user.dateApproval as Date)
+        const initalDay = new Date(String(user.dateApproval))
         const countDay = differenceInDays(currentDay, initalDay)
         const days = countDay > maxDay ? maxDay : countDay
 

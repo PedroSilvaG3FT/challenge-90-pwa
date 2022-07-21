@@ -26,6 +26,7 @@ export const Slot = styled.div`
 export const Button = styled(AppButton)`
     ${tw`mr-auto`}
     background: transparent;
+    color: ${({ theme }) => theme.colors.text};
 `
 
 export const Title = styled.b`

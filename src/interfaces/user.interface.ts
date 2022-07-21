@@ -21,6 +21,6 @@ export default interface UserInterface {
 
     currentWeight?: number
     accessCode?: string
-    dateApproval?: Date
+    dateApproval?: string | Date
     type?: number
 }

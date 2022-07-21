@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useMapState } from '@/hooks'
-import { AuthStateInterface } from '@/store/@interfaces/authState.interface'
 import { Container, Article, Content, Title, Text } from './styles'
+import { AuthStateInterface } from '@/store/@interfaces/authState.interface'
 
 const UserGoals: React.FC = () => {
-    const { user } = useMapState('auth') as AuthStateInterface
+    const { user, isTypeChallenge } = useMapState('auth') as AuthStateInterface
     const [firstName] = user.name ? user.name.split(' ') : ['']
 
     const items = [
@@ -18,12 +18,17 @@ const UserGoals: React.FC = () => {
             <Title>Olá {firstName}, bem vindo de volta</Title>
 
             <Content>
-                {items.map((item, index) => (
-                    <Article key={index}>
-                        <Title>{item.label}</Title>
-                        <Text>{item.value || 0} kg</Text>
-                    </Article>
-                ))}
+                {isTypeChallenge &&
+                    items.map((item, index) => (
+                        <Article key={index}>
+                            <Title>{item.label}</Title>
+                            <Text>{item.value || 0} kg</Text>
+                        </Article>
+                    ))}
+
+                {!isTypeChallenge && (
+                    <Text>Lembre-se de manter sua saúde em dia !</Text>
+                )}
             </Content>
         </Container>
     )

@@ -34,4 +34,9 @@ export default createGlobalStyle`
   #__next {
     height: 100vh;
   }
+
+  a {
+    text-decoration: none;
+    color: ${({ theme }) => theme.colors.text}
+  }
 `

@@ -11,25 +11,11 @@ export const Grid = styled.div`
 `
 
 export const Card = styled.article`
-    ${tw`rounded px-8 py-6 flex flex-col justify-center items-center`}
-
-    border-width: 1px;
-    border-style: solid;
+    ${tw`rounded-md px-8 py-6 flex flex-col justify-center items-center border border-solid`}
     border-color: ${props => props.theme.colors.bgSecondary};
     background: ${props => props.theme.colors.bgSecondary};
-    box-shadow: ${({ theme }) =>
-        theme.boxShadow.bottom(theme.colors.bgSecondary)};
 
-    &:nth-child(1):hover {
-        background: ${props => props.theme.colors.primary};
-    }
-    &:nth-child(2):hover {
-        background: ${props => props.theme.colors.green};
-    }
-    &:nth-child(3):hover {
-        background: ${props => props.theme.colors.yellow};
-    }
-    &:nth-child(4):hover {
+    &:hover {
         background: ${props => props.theme.colors.bgPrimary};
     }
 `

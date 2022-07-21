@@ -29,7 +29,7 @@ const AuthModal: React.FC<AuthModalProps> = props => {
     const getUser = async (id: number, token: string) => {
         try {
             const { data: user } = await userService.getById(id)
-
+            console.log('LOGIN SET ', user)
             authActions.setUser(user)
             authActions.setToken(token)
         } catch (error) {

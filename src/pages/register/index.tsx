@@ -1,5 +1,6 @@
 import React from 'react'
 import * as yup from 'yup'
+import Link from 'next/link'
 import { useMapState } from '@/hooks'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
@@ -104,6 +105,8 @@ const Register: React.FC = () => {
 
                     <Button type="submit">Avançar</Button>
                 </Form>
+
+                <Link href="/">Voltar para Login</Link>
             </Container>
         </>
     )

@@ -5,8 +5,6 @@ import tw from 'twin.macro'
 export const Container = styled(AppContainer)`
     ${tw`pb-6 pt-14 rounded-b-[2rem]`}
     background: ${props => props.theme.colors.bgSecondary};
-    box-shadow: ${({ theme }) =>
-        theme.boxShadow.bottom(theme.colors.bgSecondary)};
 `
 
 export const Content = styled.section`

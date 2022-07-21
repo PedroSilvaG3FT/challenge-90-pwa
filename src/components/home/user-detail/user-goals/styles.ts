@@ -21,8 +21,12 @@ export const Article = styled.article`
         }
     }
 
-    > b {
+    &:last-of-type > b {
         color: ${props => props.theme.colors.primary};
+    }
+
+    > b {
+        color: ${props => props.theme.colors.yellow};
     }
 `
 

@@ -11,8 +11,9 @@ export const AppFormGroup = styled.div`
     > input,
     > select,
     > textarea {
-        ${tw`w-full h-11 block rounded py-1 px-3 border-0 invalid:border-red-500`}
+        ${tw`w-full h-11 block rounded py-1 px-3 border border-solid`}
         text-rendering: optimizeLegibility !important;
+        /* border-color: ${props => props.theme.colors.text}; */
 
         &:focus {
             ${tw`outline-none border border-solid`}

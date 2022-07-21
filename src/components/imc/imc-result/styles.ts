@@ -19,5 +19,5 @@ export const ImageContainer = styled.figure`
 `
 
 export const Image = styled.img`
-    ${tw`w-full h-full`}
+    ${tw`w-full h-full max-w-[40vw]`}
 `

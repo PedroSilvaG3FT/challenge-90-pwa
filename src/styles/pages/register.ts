@@ -18,7 +18,7 @@ export const Separator = styled.hr`
 `
 
 export const Form = styled.form`
-    ${tw`w-full `}
+    ${tw`w-full mb-4`}
 `
 
 export const FormGroup = styled(AppFormGroup)`

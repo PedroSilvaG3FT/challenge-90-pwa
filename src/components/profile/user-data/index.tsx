@@ -110,13 +110,13 @@ const UserData: React.FC = () => {
                 </Section>
 
                 {isPaymentLate && <Span>Pagamento em Atraso</Span>}
-
-                <AvatarModal
-                    isOpen={isModalOpen}
-                    onSave={saveUserImage}
-                    onClose={() => setIsModalOpen(false)}
-                />
             </Container>
+
+            <AvatarModal
+                isOpen={isModalOpen}
+                onSave={saveUserImage}
+                onClose={() => setIsModalOpen(false)}
+            />
         </>
     )
 }

@@ -4,12 +4,12 @@ import { authActions } from '@/store/reducers/auth.reducer'
 
 export default {
     userService: new UserService(),
-    user: store.getState().auth.user,
     updateUserStore() {
-        if (!this.user.id) return
+        const user = store.getState().auth.user
+        if (!user.id) return
 
         this.userService
-            .getById(this.user.id)
+            .getById(user.id)
             .then(({ data }) => authActions.setUser(data))
     }
 }
