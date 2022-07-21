@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { GetStaticProps } from 'next'
 import AppHead from '@/components/common/app-head'
 import { Container } from '@/styles/pages/profile'
 import UserData from '@/components/profile/user-data'
@@ -15,6 +16,11 @@ const Profile: React.FC = () => {
             </Container>
         </>
     )
+}
+
+export const getStaticProps: GetStaticProps = () => {
+    const props = { protected: true }
+    return { props }
 }
 
 export default Profile

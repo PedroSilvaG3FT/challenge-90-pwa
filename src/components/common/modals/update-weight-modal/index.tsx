@@ -10,6 +10,7 @@ import { Form, FormGroup, Button, Input, Label, Span } from './styled'
 import { ResponseErrorInterface } from '@/interfaces/_response-error.interface'
 import { AuthStateInterface } from '@/store/@interfaces/authState.interface'
 import { authActions } from '@/store/reducers/auth.reducer'
+import { AlertService } from '@/services/_alert.service'
 
 interface UpdateWeightModalProps extends AppModalInterface {
     onUpdate: (data: number) => void
@@ -20,7 +21,9 @@ interface UpdateWeightForm {
 }
 
 const UpdateWeightModal: React.FC<UpdateWeightModalProps> = props => {
+    const alertService = new AlertService()
     const weightService = new WeightService()
+
     const { user } = useMapState('auth') as AuthStateInterface
     const { isOpen, onBackdropClick, onClose, onUpdate } = props
 
@@ -50,7 +53,7 @@ const UpdateWeightModal: React.FC<UpdateWeightModalProps> = props => {
                 currentWeight: updateWeightDTO.weight
             })
         } catch (error: ResponseErrorInterface) {
-            console.error('ERROR :', error)
+            alertService.error('Ocorreu um erro ao atualizar o peso')
         }
     }
 

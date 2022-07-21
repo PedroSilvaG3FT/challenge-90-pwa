@@ -1,4 +1,5 @@
 import { useMapState } from '@/hooks'
+import { GetStaticProps } from 'next'
 import { Container } from '@/styles/pages/menu'
 import CardDay from '@/components/menu/card-day'
 import React, { useEffect, useState } from 'react'
@@ -90,6 +91,11 @@ const Menu: React.FC = () => {
             </Container>
         </>
     )
+}
+
+export const getStaticProps: GetStaticProps = () => {
+    const props = { protected: true }
+    return { props }
 }
 
 export default Menu

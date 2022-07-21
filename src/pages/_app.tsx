@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import store from '@/store'
 import Head from 'next/head'
+import NoAccess from './no-access'
 import { AppProps } from 'next/app'
 import { Provider } from 'react-redux'
 import { useRouter } from 'next/router'
 import Layout from '@/components/ui/layout'
 import { persistStore } from 'redux-persist'
 import { SessionStorage } from '@/store/session'
+import { AuthContext } from '@/context/auth.context'
 import { PersistGate } from 'redux-persist/integration/react'
 import { SHOW_REQUEST_INSTALL } from '@/contants/session-keys'
 import EncouragingInstallIOS from '@/components/common/modals/encouraging-install-ios'
@@ -39,12 +41,26 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
         if (wasOpened) return
 
         sessionStorage.setItem(SHOW_REQUEST_INSTALL, 'true')
-        setIsModalOpen(true)
+        setTimeout(() => setIsModalOpen(true), 1500)
     }
 
     const onCloseRequestInstall = () => {
         sessionStorage.setItem(SHOW_REQUEST_INSTALL, 'false')
         setIsModalOpen(false)
+    }
+
+    const routeControl = () => {
+        if (pageProps.protected && !user.id) return <NoAccess />
+
+        return (
+            <>
+                <Component {...pageProps} />
+                <EncouragingInstallIOS
+                    isOpen={isModalOpen}
+                    onClose={onCloseRequestInstall}
+                />
+            </>
+        )
     }
 
     return (
@@ -58,13 +74,9 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
 
             <Provider store={store}>
                 <PersistGate loading={null} persistor={persistor}>
-                    <Layout>
-                        <Component {...pageProps} />
-                        <EncouragingInstallIOS
-                            isOpen={isModalOpen}
-                            onClose={onCloseRequestInstall}
-                        />
-                    </Layout>
+                    <AuthContext.Provider value={user}>
+                        <Layout>{routeControl()}</Layout>
+                    </AuthContext.Provider>
                 </PersistGate>
             </Provider>
         </>

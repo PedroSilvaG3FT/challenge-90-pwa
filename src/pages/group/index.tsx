@@ -1,7 +1,8 @@
+import React, { useEffect } from 'react'
+import { GetStaticProps } from 'next'
 import { useMapState } from '@/hooks'
 import { BsWhatsapp } from 'react-icons/bs'
 import Avatar from '@/assets/icons/avatar.png'
-import React, { useEffect } from 'react'
 import AppHead from '@/components/common/app-head'
 import { UserService } from '@/services/user.service'
 import { AlertService } from '@/services/_alert.service'
@@ -76,6 +77,11 @@ const Group: React.FC = () => {
             </Container>
         </>
     )
+}
+
+export const getStaticProps: GetStaticProps = () => {
+    const props = { protected: true }
+    return { props }
 }
 
 export default Group

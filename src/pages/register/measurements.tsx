@@ -78,7 +78,7 @@ const Measurements: React.FC = () => {
             alertService.success(data.message)
             router.push('/term')
         } catch (error) {
-            console.error('error', error)
+            alertService.error('Ocorreu um erro ao finalizar cadastro')
         }
     }
 

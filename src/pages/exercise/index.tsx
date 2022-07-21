@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useMapState } from '@/hooks'
+import { GetStaticProps } from 'next'
 import AppHead from '@/components/common/app-head'
 import { AlertService } from '@/services/_alert.service'
 import { ExerciseService } from '@/services/exercice.service'
@@ -47,6 +48,11 @@ const Exercise: React.FC = () => {
             </Container>
         </>
     )
+}
+
+export const getStaticProps: GetStaticProps = () => {
+    const props = { protected: true }
+    return { props }
 }
 
 export default Exercise

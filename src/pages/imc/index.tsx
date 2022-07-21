@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import store from '@/store'
+import { GetStaticProps } from 'next'
 import { Container } from '@/styles/pages/imc'
 import IMCForm from '@/components/imc/imc-form'
 import AppHead from '@/components/common/app-head'
@@ -39,6 +40,11 @@ const IMC: React.FC = () => {
             </Container>
         </>
     )
+}
+
+export const getStaticProps: GetStaticProps = () => {
+    const props = { protected: true }
+    return { props }
 }
 
 export default IMC

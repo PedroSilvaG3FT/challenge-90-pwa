@@ -1,6 +1,7 @@
 import React from 'react'
 import store from '@/store'
 import { useRouter } from 'next/router'
+import { GetStaticProps } from 'next'
 import AppHead from '@/components/common/app-head'
 import { UserService } from '@/services/user.service'
 import { AlertService } from '@/services/_alert.service'
@@ -43,6 +44,11 @@ const UpdatePassword: React.FC = () => {
             </Container>
         </>
     )
+}
+
+export const getStaticProps: GetStaticProps = () => {
+    const props = { protected: true }
+    return { props }
 }
 
 export default UpdatePassword
