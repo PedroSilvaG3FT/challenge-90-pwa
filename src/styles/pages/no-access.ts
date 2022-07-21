@@ -17,4 +17,6 @@ export const Text = styled.p.attrs(animationFadeInUp)`
     ${tw`font-bold text-lg mb-4`}
 `
 
-export const Image = styled.img.attrs(animationBounceIn)``
+export const Image = styled.img.attrs(animationBounceIn)`
+    ${tw`w-full`}
+`
