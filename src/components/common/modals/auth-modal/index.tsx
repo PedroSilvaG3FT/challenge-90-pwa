@@ -12,9 +12,11 @@ import CodeForm from '@/components/common/modals/auth-modal/code-form'
 import { LoginFormInterface } from '@/interfaces/login-credential.interface'
 import { ResponseErrorInterface } from '@/interfaces/_response-error.interface'
 import CredencialForm from '@/components/common/modals/auth-modal/credencial-form'
+import { useLoading } from '@/hooks/loading.hook'
+import UserInterface from '@/interfaces/user.interface'
 
 interface AuthModalProps extends AppModalInterface {
-    onLogin: () => void
+    onLogin: (user: UserInterface) => void
 }
 
 const AuthModal: React.FC<AuthModalProps> = props => {
@@ -38,23 +40,30 @@ const AuthModal: React.FC<AuthModalProps> = props => {
 
     const handleSubmitCredentials = async (loginForm: LoginFormInterface) => {
         try {
+            useLoading(true, 'Realizando login')
+
             const { data } = await authService.login(loginForm)
             await getUser(data.user.id, data.token)
 
-            onLogin()
+            onLogin(data.user)
         } catch (error: ResponseErrorInterface) {
             alertService.error(error.response.data.message)
+        } finally {
+            useLoading(false)
         }
     }
 
     const handleSubmitCode = async ({ code }: LoginCodeInterface) => {
         try {
+            useLoading(true, 'Realizando login')
             const { data } = await authService.loginCode(code)
             await getUser(data.user.id, data.token)
 
-            onLogin()
+            onLogin(data.user)
         } catch (error: ResponseErrorInterface) {
             alertService.error(error.response.data.message)
+        } finally {
+            useLoading(false)
         }
     }
 

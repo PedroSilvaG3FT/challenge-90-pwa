@@ -8,6 +8,7 @@ import { AlertService } from '@/services/_alert.service'
 import { Container } from '@/styles/pages/update-password'
 import FormUpdatePassword from '@/components/update-password/form-update-password'
 import { UpdatePasswordFormInterface } from '@/interfaces/updatePassword.interface'
+import { useLoading } from '@/hooks/loading.hook'
 
 const UpdatePassword: React.FC = () => {
     const state = store.getState()
@@ -21,6 +22,7 @@ const UpdatePassword: React.FC = () => {
 
     const onSubmit = async (data: UpdatePasswordFormInterface) => {
         try {
+            useLoading(true, 'Atualizando sua senha')
             const updateDTO = {
                 userId: Number(user.id),
                 password: data.password
@@ -32,6 +34,8 @@ const UpdatePassword: React.FC = () => {
             setTimeout(() => router.push(urlBackTo), 4000)
         } catch (error) {
             alertService.error('Ocorreu um erro ao atualizar senha')
+        } finally {
+            useLoading(false)
         }
     }
 

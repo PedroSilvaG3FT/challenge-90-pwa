@@ -19,6 +19,7 @@ import {
     Span,
     Row
 } from './styles'
+import { useLoading } from '@/hooks/loading.hook'
 
 const ProfileForm: React.FC = () => {
     const userService = new UserService()
@@ -52,6 +53,7 @@ const ProfileForm: React.FC = () => {
 
     const handleSubmitForm = async (profileForm: any) => {
         try {
+            useLoading(true, 'Atualizando os seus dados')
             const rawPhoneNumber = phoneNumberMask.getRawValue(
                 profileForm.phoneNumber
             )
@@ -66,6 +68,8 @@ const ProfileForm: React.FC = () => {
             alertService.success('Dados atualizados com sucesso')
         } catch (error: ResponseErrorInterface) {
             alertService.error(error.response.data.message)
+        } finally {
+            useLoading(false)
         }
     }
 

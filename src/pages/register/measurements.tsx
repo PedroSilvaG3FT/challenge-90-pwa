@@ -25,6 +25,7 @@ import {
     Span,
     Separator
 } from '@/styles/pages/register'
+import { useLoading } from '@/hooks/loading.hook'
 
 const Measurements: React.FC = () => {
     const router = useRouter()
@@ -46,6 +47,7 @@ const Measurements: React.FC = () => {
 
     const getUser = async (id: number, token: string) => {
         try {
+            useLoading(true, 'Preparando usuario')
             const { data: user } = await userService.getById(id)
 
             authActions.setUser(user)
@@ -57,6 +59,7 @@ const Measurements: React.FC = () => {
 
     const handleLogin = async ({ email, password }: RegisterFormInterface) => {
         try {
+            useLoading(true, 'Validando acessos de login')
             const { data } = await authService.login({ email, password })
             await getUser(data.user.id, data.token)
         } catch (error) {
@@ -66,6 +69,7 @@ const Measurements: React.FC = () => {
 
     const handleSubmitForm = async (registerForm: RegisterFormInterface) => {
         try {
+            useLoading(true, 'Criando usuário')
             const formDTO = { ...model, ...registerForm }
             registerActions.setRegisterModel(formDTO)
 
@@ -79,6 +83,8 @@ const Measurements: React.FC = () => {
             router.push('/term')
         } catch (error) {
             alertService.error('Ocorreu um erro ao finalizar cadastro')
+        } finally {
+            useLoading(false)
         }
     }
 

@@ -11,6 +11,7 @@ import { SessionStorage } from '@/store/session'
 import { AuthContext } from '@/context/auth.context'
 import { PersistGate } from 'redux-persist/integration/react'
 import { SHOW_REQUEST_INSTALL } from '@/contants/session-keys'
+import { loadingActions } from '@/store/reducers/loading.reducer'
 import EncouragingInstallIOS from '@/components/common/modals/encouraging-install-ios'
 
 const persistor = persistStore(store)
@@ -26,6 +27,8 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
         if (token && !user.acceptTerm) router.push('term')
         else if (token && !user.active) router.push('waiting-approval')
 
+        loadingActions.setMessage('')
+        loadingActions.setLoading(false)
         controlRequestInstall()
     }, [])
 

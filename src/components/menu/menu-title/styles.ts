@@ -20,7 +20,7 @@ export const Card = styled.article.attrs(animatefadeInLeft)`
 `
 
 export const Title = styled.h3`
-    ${tw`mb-2`}
+    ${tw`mb-2 text-center`}
 `
 
 export const SubTitle = styled.h5``

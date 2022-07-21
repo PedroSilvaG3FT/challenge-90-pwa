@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import Logo from '@/assets/images/logo.png'
 import AppHead from '@/components/common/app-head'
+import UserInterface from '@/interfaces/user.interface'
 import AuthModal from '@/components/common/modals/auth-modal'
 import { Container, Content, Image, Button } from '@/styles/pages/wellcome'
 import { AuthStateInterface } from '@/store/@interfaces/authState.interface'
@@ -12,9 +13,9 @@ const Wellcome: React.FC = () => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const { token } = useMapState('auth') as AuthStateInterface
 
-    const onLogin = async () => {
+    const onLogin = async (user: UserInterface) => {
         setIsModalOpen(false)
-        router.push('/home')
+        router.push(!user.active ? 'waiting-approval' : '/home')
     }
 
     const goToRegister = () => router.push('/register')

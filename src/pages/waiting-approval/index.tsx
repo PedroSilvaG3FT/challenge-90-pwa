@@ -16,6 +16,7 @@ import {
     Paragraph,
     TextHighlight
 } from '@/styles/pages/waiting-approval'
+import { useLoading } from '@/hooks/loading.hook'
 
 const WaitingApproval: React.FC = () => {
     const router = useRouter()
@@ -35,6 +36,7 @@ const WaitingApproval: React.FC = () => {
     const getUser = async () => {
         try {
             if (!user.id) return
+            useLoading(true, 'Validando aprovação')
             const { data } = await userService.getById(user.id)
 
             if (data.active) {
@@ -43,6 +45,8 @@ const WaitingApproval: React.FC = () => {
             }
         } catch (error: ResponseErrorInterface) {
             alertService.error(error.response.data.message)
+        } finally {
+            useLoading(false)
         }
     }
 

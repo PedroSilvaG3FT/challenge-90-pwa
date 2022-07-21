@@ -24,6 +24,7 @@ import {
     Span,
     Separator
 } from '@/styles/pages/register'
+import { useLoading } from '@/hooks/loading.hook'
 
 const Register: React.FC = () => {
     const router = useRouter()
@@ -45,23 +46,26 @@ const Register: React.FC = () => {
 
     const hasUserEmail = async (email: string) => {
         try {
+            useLoading(true, 'Validando email')
             const { data } = await userService.getByEmail(email)
             return !!data
         } catch (error: ResponseErrorInterface) {
             alertService.error(error.response.data.message)
+        } finally {
+            useLoading(false)
         }
     }
 
     const handleSubmitForm = async (registerForm: RegisterFormInterface) => {
-        const hasUser = await hasUserEmail(registerForm.email as string)
-
-        if (hasUser) {
-            alertService.error('Esse email já está em uso')
+        if (registerForm.password != registerForm.confirmPassword) {
+            alertService.error('As senhas não coincidem')
             return
         }
 
-        if (registerForm.password != registerForm.confirmPassword) {
-            alertService.error('As senhas não coincidem')
+        const hasUser = await hasUserEmail(registerForm.email as string)
+
+        if (hasUser) {
+            alertService.error('O email informado já está em uso')
             return
         }
 
