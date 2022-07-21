@@ -6,7 +6,6 @@ import React, { useEffect, useState } from 'react'
 import AppHead from '@/components/common/app-head'
 import MenuTitle from '@/components/menu/menu-title'
 import { MenuService } from '@/services/menu.service'
-import { AlertService } from '@/services/_alert.service'
 import SelectionDay from '@/components/menu/selection-day'
 import { menuActions } from '@/store/reducers/menu.reducer'
 import { MenuDayInterface } from '@/interfaces/menu.interface'
@@ -16,10 +15,10 @@ import { ResponseErrorInterface } from '@/interfaces/_response-error.interface'
 
 const Menu: React.FC = () => {
     const menuService = new MenuService()
-    const alertService = new AlertService()
-
     const { user } = useMapState('auth') as AuthStateInterface
     const { menu } = useMapState('menu') as MenuStateInterface
+
+    const [initiated, setInitiated] = useState(false)
     const [currentDay, setCurrentDay] = useState<MenuDayInterface>(
         {} as MenuDayInterface
     )
@@ -29,36 +28,36 @@ const Menu: React.FC = () => {
 
     useEffect(() => {
         getMenuUser()
+
+        return () => {
+            setInitiated(false)
+        }
     }, [])
 
     useEffect(() => {
-        // if (menu.menuId) initCurrentDay()
+        if (!initiated) initCurrentDay()
     }, [menu])
 
     const getMenuUser = async () => {
         try {
             const { data } = await menuService.getById(Number(user.id))
             menuActions.setMenu(data)
-            initCurrentDay()
         } catch (error: ResponseErrorInterface) {
             console.error(error)
         }
     }
 
     const initCurrentDay = () => {
-        if (!menu.days) return
+        if (!menu.menuId) return
 
         const current = new Date().getDay() + 1
         const [first] = menu.days.filter(
             ({ numberDay }) => numberDay === current
         )
 
+        setInitiated(true)
         setCurrentDay(first)
         setSelectedDay(first)
-    }
-
-    const onSelectDay = (day: MenuDayInterface) => {
-        setSelectedDay(day)
     }
 
     return (
@@ -77,7 +76,7 @@ const Menu: React.FC = () => {
                             days={menu.days}
                             current={currentDay}
                             selected={selectedDay}
-                            onSelect={onSelectDay}
+                            onSelect={day => setSelectedDay(day)}
                         />
 
                         <CardDay data={selectedDay} />
