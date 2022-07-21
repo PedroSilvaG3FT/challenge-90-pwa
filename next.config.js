@@ -6,25 +6,23 @@ const withPlugins = require('next-compose-plugins')
 
 const nextConfig = { reactStrictMode: true }
 
+const withImagesConfig = {
+    esModule: true,
+    images: {
+        disableStaticImages: true
+    }
+}
+
+const withPWAConfig = {
+    pwa: {
+        dest: 'public',
+        register: true,
+        skipWaiting: true
+    }
+}
+
 module.exports = withPlugins([
     [nextConfig],
-    [
-        withImages,
-        {
-            esModule: true,
-            images: {
-                disableStaticImages: true
-            }
-        }
-    ],
-    [
-        withPWA,
-        {
-            pwa: {
-                dest: 'public',
-                register: true,
-                skipWaiting: true
-            }
-        }
-    ]
+    [withImages, withImagesConfig],
+    [withPWA, withPWAConfig]
 ])
