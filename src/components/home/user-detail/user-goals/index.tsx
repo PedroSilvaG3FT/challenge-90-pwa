@@ -13,23 +13,26 @@ const UserGoals: React.FC = () => {
         { label: 'Meta Final', value: user.goalWeight }
     ]
 
+    const filteredItems = isTypeChallenge
+        ? items
+        : items.filter((item, index) => index !== 1)
+
     return (
         <Container>
             <Title>Olá {firstName}, bem vindo de volta</Title>
 
             <Content>
-                {isTypeChallenge &&
-                    items.map((item, index) => (
-                        <Article key={index}>
-                            <Title>{item.label}</Title>
-                            <Text>{item.value || 0} kg</Text>
-                        </Article>
-                    ))}
-
-                {!isTypeChallenge && (
-                    <Text>Lembre-se de manter sua saúde em dia !</Text>
-                )}
+                {filteredItems.map((item, index) => (
+                    <Article key={index}>
+                        <Title>{item.label}</Title>
+                        <Text>{item.value || 0} kg</Text>
+                    </Article>
+                ))}
             </Content>
+
+            {!isTypeChallenge && (
+                <Text>Lembre-se de manter sua saúde em dia !</Text>
+            )}
         </Container>
     )
 }

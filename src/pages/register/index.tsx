@@ -24,7 +24,7 @@ import {
     Span,
     Separator
 } from '@/styles/pages/register'
-import { useLoading } from '@/hooks/loading.hook'
+import { setLoading } from '@/hooks/loading.hook'
 
 const Register: React.FC = () => {
     const router = useRouter()
@@ -46,13 +46,13 @@ const Register: React.FC = () => {
 
     const hasUserEmail = async (email: string) => {
         try {
-            useLoading(true, 'Validando email')
+            setLoading(true, 'Validando email')
             const { data } = await userService.getByEmail(email)
             return !!data
         } catch (error: ResponseErrorInterface) {
             alertService.error(error.response.data.message)
         } finally {
-            useLoading(false)
+            setLoading(false)
         }
     }
 

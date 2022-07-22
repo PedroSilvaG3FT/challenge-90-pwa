@@ -11,7 +11,7 @@ import { ResponseErrorInterface } from '@/interfaces/_response-error.interface'
 import { AuthStateInterface } from '@/store/@interfaces/authState.interface'
 import { authActions } from '@/store/reducers/auth.reducer'
 import { AlertService } from '@/services/_alert.service'
-import { useLoading } from '@/hooks/loading.hook'
+import { setLoading } from '@/hooks/loading.hook'
 
 interface UpdateWeightModalProps extends AppModalInterface {
     onUpdate: (data: number) => void
@@ -41,7 +41,7 @@ const UpdateWeightModal: React.FC<UpdateWeightModalProps> = props => {
 
     const handleSubmitForm = async (form: UpdateWeightForm) => {
         try {
-            useLoading(true, 'Atualizando peso')
+            setLoading(true, 'Atualizando peso')
             const updateWeightDTO = {
                 userId: Number(user.id),
                 weight: Number(form.weight)
@@ -57,7 +57,7 @@ const UpdateWeightModal: React.FC<UpdateWeightModalProps> = props => {
         } catch (error: ResponseErrorInterface) {
             alertService.error('Ocorreu um erro ao atualizar o peso')
         } finally {
-            useLoading(false)
+            setLoading(false)
         }
     }
 
