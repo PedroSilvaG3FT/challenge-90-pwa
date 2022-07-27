@@ -50,7 +50,7 @@ const Summary: React.FC = () => {
         return {
             title: 'Meta da semana',
             color: Theme.colors.yellow,
-            label: `${currentWeight}/${goalWeek || 0} kg`,
+            label: `${currentWeight}/${goalWeek || 0}kg`,
             percent: getPercent(Number(goalWeek || 0), Number(currentWeight))
         }
     }
@@ -60,7 +60,7 @@ const Summary: React.FC = () => {
         return {
             title: 'Meta Final',
             color: Theme.colors.primary,
-            label: `${currentWeight}/${goalWeight || 0} kg`,
+            label: `${currentWeight}/${goalWeight || 0}kg`,
             percent: getPercent(Number(goalWeight || 0), Number(currentWeight))
         }
     }

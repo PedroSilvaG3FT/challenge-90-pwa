@@ -5,6 +5,6 @@ export const Container = styled.section`
     ${tw`relative`}
 
     .CircularProgressbar-text {
-        ${tw`text-[18px]`}
+        ${tw`text-[15px]`}
     }
 `

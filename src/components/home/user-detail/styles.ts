@@ -27,3 +27,7 @@ export const Button = styled(AppButton)`
     ${tw`w-2/5 top-12 relative uppercase text-sm`}
     letter-spacing: 4px;
 `
+
+export const Text = styled.p`
+    ${tw`mb-2`}
+`

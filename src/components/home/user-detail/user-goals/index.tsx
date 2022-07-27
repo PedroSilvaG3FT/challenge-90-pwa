@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useMapState } from '@/hooks'
 import { Container, Article, Content, Title, Text } from './styles'
 import { AuthStateInterface } from '@/store/@interfaces/authState.interface'
@@ -13,16 +13,12 @@ const UserGoals: React.FC = () => {
         { label: 'Meta Final', value: user.goalWeight }
     ]
 
-    const filteredItems = isTypeChallenge
-        ? items
-        : items.filter((item, index) => index !== 1)
-
     return (
         <Container>
             <Title>Olá {firstName}, bem vindo de volta</Title>
 
             <Content>
-                {filteredItems.map((item, index) => (
+                {items.map((item, index) => (
                     <Article key={index}>
                         <Title>{item.label}</Title>
                         <Text>{item.value || 0} kg</Text>

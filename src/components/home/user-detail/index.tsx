@@ -6,7 +6,15 @@ import Summary from '@/components/home/user-detail/summary'
 import ScrollAnimation from '@/components/ui/scroll-animation'
 import UserGoals from '@/components/home/user-detail/user-goals'
 import { AuthStateInterface } from '@/store/@interfaces/authState.interface'
-import { Container, Content, Article, Image, Separator, Button } from './styles'
+import {
+    Container,
+    Content,
+    Article,
+    Image,
+    Separator,
+    Button,
+    Text
+} from './styles'
 
 const UserDetail: React.FC = () => {
     const router = useRouter()
@@ -23,8 +31,12 @@ const UserDetail: React.FC = () => {
                         <UserGoals />
                     </Article>
 
-                    {isTypeChallenge && <Separator />}
-                    {isTypeChallenge && <Summary />}
+                    <Separator />
+
+                    {!isTypeChallenge && (
+                        <Text>Lembre-se de manter sua saúde em dia !</Text>
+                    )}
+                    <Summary />
 
                     <Button onClick={goToProfile}>Perfil</Button>
                 </Content>
