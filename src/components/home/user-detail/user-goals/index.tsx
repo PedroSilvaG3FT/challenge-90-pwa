@@ -4,7 +4,7 @@ import { Container, Article, Content, Title, Text } from './styles'
 import { AuthStateInterface } from '@/store/@interfaces/authState.interface'
 
 const UserGoals: React.FC = () => {
-    const { user, isTypeChallenge } = useMapState('auth') as AuthStateInterface
+    const { user } = useMapState('auth') as AuthStateInterface
     const [firstName] = user.name ? user.name.split(' ') : ['']
 
     const items = [
@@ -25,10 +25,6 @@ const UserGoals: React.FC = () => {
                     </Article>
                 ))}
             </Content>
-
-            {!isTypeChallenge && (
-                <Text>Lembre-se de manter sua saúde em dia !</Text>
-            )}
         </Container>
     )
 }
